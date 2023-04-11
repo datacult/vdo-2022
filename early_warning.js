@@ -71,9 +71,9 @@ let warning = ((selector = '#warning') => {
     //update your scales to match the data! for now base this on the first view
 
     // Add X axis scale
-    const xScale = d3.scaleBand(
-        ['bar1','bar2'], 
-        [0,width]);
+    const xScale = d3.scaleBand()
+        .domain(['bar1','bar2'])
+        .range([0,width]);
 
 
     // Add Y axis scale
