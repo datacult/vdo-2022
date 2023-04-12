@@ -1,0 +1,60 @@
+<!-- 
+    // © 2023 Data Culture
+    // Released under the ISC license.
+    // https://studio.datacult.com/ 
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+
+    <style>
+    /* styling just for local development */
+    #youth-programs, .step {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #youth-programs {
+        position: sticky;
+        top: 0;
+    }
+    /* add any local styling here - will be added directly to webflow */
+    #data-circle {
+        transition: 1s;
+    }
+        
+    </style>
+</head>
+
+<body>
+    <div id="scroll">
+        <div id="youth-programs"></div>
+        <div class="step" id="campus"></div>
+        <div class="step" id="influencers"></div>
+        <div class="step" id="reach"></div>
+    </div>
+</body>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3"></script>
+<script src="youth_programs.js"></script>
+<script>
+    async function init() {
+
+        // if we add a dataset we can edit and use this code
+        // let data = await d3.csv('impact.csv', d3.autoType)
+
+        // let mapping = { x: 'date', y: 'Users' }
+
+        let youth_vis = youth("#youth-programs")//, data, mapping)
+
+    }
+    init()
+
+</script>
+
+</html>
