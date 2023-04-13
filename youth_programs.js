@@ -227,13 +227,13 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
         .attr('width',img_width)
     
     var radius = 180
-    drawDonutChart(40)
+    // drawDonutChart(40)
     
-    function drawDonutChart(percent) {
+    // function drawDonutChart(percent) {
     
       var dataset = {
             lower: calcPercent(0),
-            upper: calcPercent(percent)
+            upper: calcPercent(40.15)
           },
           pie = d3.pie().sort(null)
     
@@ -254,22 +254,22 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
         d3.select('.color0').attr('opacity',1)
     
         var progress = 0;
-        var timeout = setTimeout(function () {
-          clearTimeout(timeout);
-          path = path.data(pie(dataset.upper)); // update the data
-          path.transition().duration(1500).attrTween("d", function (a) {
-            // Store the displayed angles in _current.
-            // Then, interpolate from _current to the new angles.
-            // During the transition, _current is updated in-place by d3.interpolate.
-            var i  = d3.interpolate(this._current, a);
-            var i2 = d3.interpolate(progress, percent)
-            this._current = i(0);
-            return function(t) {
-              return arc(i(t));
-            };
-          }); // redraw the arcs
-        }, 200);
-      };
+        // var timeout = setTimeout(function () {
+        //   clearTimeout(timeout);
+        //   path = path.data(pie(dataset.upper)); // update the data
+        //   path.transition().duration(1500).attrTween("d", function (a) {
+        //     // Store the displayed angles in _current.
+        //     // Then, interpolate from _current to the new angles.
+        //     // During the transition, _current is updated in-place by d3.interpolate.
+        //     var i  = d3.interpolate(this._current, a);
+        //     var i2 = d3.interpolate(progress, percent)
+        //     this._current = i(0);
+        //     return function(t) {
+        //       return arc(i(t));
+        //     };
+        //   }); // redraw the arcs
+        // }, 200);
+    //   };
     
     function calcPercent(percent) {
       return [percent, 100-percent];
@@ -332,7 +332,14 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                     .duration(1500)
                     .style('opacity',1)
 
-                    drawDonutChart(0)
+                path = path.data(pie(dataset.lower)); // update the data
+                path.transition().duration(500).attrTween("d", function (a) {
+                    var i  = d3.interpolate(this._current, a);
+                    this._current = i(0);
+                    return function(t) {
+                    return arc(i(t));
+                    };
+                });
 
             }
         // update for step 2
@@ -361,7 +368,14 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                     .duration(1500)
                     .style('opacity',1)
 
-                drawDonutChart(0)                
+                    path = path.data(pie(dataset.lower)); // update the data
+                    path.transition().duration(500).attrTween("d", function (a) {
+                      var i  = d3.interpolate(this._current, a);
+                      this._current = i(0);
+                      return function(t) {
+                        return arc(i(t));
+                      };
+                    });               
 
             }
         // update for step 2
@@ -390,7 +404,14 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                     .duration(1500)
                     .style('opacity',0.3)
 
-                drawDonutChart(40.15)
+                path = path.data(pie(dataset.upper)); // update the data
+                path.transition().duration(1500).delay(1500).attrTween("d", function (a) {
+                    var i  = d3.interpolate(this._current, a);
+                    this._current = i(0);
+                    return function(t) {
+                    return arc(i(t));
+                    };
+                });
 
                 
             }
