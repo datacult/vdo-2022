@@ -1,0 +1,52 @@
+
+<!-- 
+    // © 2023 Data Culture
+    // Released under the ISC license.
+    // https://studio.datacult.com/ 
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+
+    <style>
+    /* styling just for local development */
+    #scroll {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #state-programs {
+        width: 1000px;
+    }
+    /* add any local styling here - will be added directly to webflow */
+        
+    </style>
+</head>
+
+<body>
+    <div id="scroll">
+        <div id="state-programs"></div>
+    </div>
+</body>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="state_programs.js"></script>
+<script>
+    async function init() {
+
+        // if we add a dataset we can edit and use this code
+        let data = await d3.csv('state_programs.csv', d3.autoType)
+
+        // let mapping = { x: 'date', y: 'Users' }
+
+        let state_vis = state_programs("#state-programs", data)
+
+    }
+    init()
+
+</script>
+
+</html>
