@@ -55,6 +55,12 @@ let state_programs = ((selector = '#state-programs', data) => {
         .domain(["Radio","Streaming","Reminders","Peer"])
         .range(["#6941BD", "#FF9995", "#819DFF", "#D6D6F2"]);
 
+    var radius = 5.5
+
+    const circleScale = d3.scaleLinear()
+        .domain([0,250000])
+        .range([2,radius])
+
     ////////////////////////////////////
     //////////// add to DOM ////////////
     //////////////////////////////////// 
@@ -115,24 +121,27 @@ let state_programs = ((selector = '#state-programs', data) => {
         .style('fill','#1C0D32')
         .style('font-weight','400')
 
-    var radio_dots = Math.round(parseInt(d.Radio.replace(/,/g, ""))/250000),
-        streaming_dots = Math.round(parseInt(d.Streaming.replace(/,/g, ""))/250000),
-        reminder_dots = Math.round(parseInt(d.Reminders.replace(/,/g, ""))/250000),
-        peer_dots = d.Peer ? Math.round(parseInt(d.Peer.replace(/,/g, ""))/250000) : 0,
+    var radio_dots = Math.ceil(parseInt(d.Radio.replace(/,/g, ""))/250000),radio_remain = parseInt(d.Radio.replace(/,/g, ""))%250000,
+        streaming_dots = Math.ceil(parseInt(d.Streaming.replace(/,/g, ""))/250000),streaming_remain = parseInt(d.Streaming.replace(/,/g, ""))%250000,
+        reminder_dots = Math.ceil(parseInt(d.Reminders.replace(/,/g, ""))/250000),reminder_remain = parseInt(d.Reminders.replace(/,/g, ""))%250000,
+        peer_dots = d.Peer ? Math.ceil(parseInt(d.Peer.replace(/,/g, ""))/250000) : 0,peer_remain = d.Peer ? parseInt(d.Peer.replace(/,/g, ""))%250000 : 0,
         total_dots = radio_dots+streaming_dots+reminder_dots+peer_dots
 
-        console.log(radio_dots+' '+streaming_dots+' '+reminder_dots+' '+peer_dots)
-
     for (let i = 0; i < total_dots; i++) {
-        var radius = 5, start_x = left_margin+radius, start_y = 70+radius,
+        var start_x = left_margin+radius, start_y = 70+radius,
         num_per_row = 10, space = radius*2
 
         var row = Math.ceil((i+1)/num_per_row)-1, col = (i)%num_per_row
 
+        console.log(radio_remain+' '+streaming_remain+' '+reminder_remain+' '+peer_remain)
+        console.log(circleScale(20000))
+
         state_group.append('circle')
             .attr('class','impression-circle')
             .attr('id','circ'+i)
-            .attr('r',radius)
+            // .attr('r',radius)
+            // .attr('r',(i == radio_dots-1) ? circleScale(radio_remain) : circleScale(250000))
+            .attr('r',(i == radio_dots-1) ? circleScale(radio_remain) : ((i == radio_dots+streaming_dots-1) ? circleScale(streaming_remain) : ((i == radio_dots+streaming_dots+reminder_dots-1) ? circleScale(reminder_remain) : ((i == radio_dots+streaming_dots+reminder_dots+peer_dots-1) ? circleScale(peer_remain) : (circleScale(250000))))))
             .attr('cx',start_x+(radius+space)*col)
             .attr('cy',start_y+(radius+space)*row)
             .attr('fill',(i < radio_dots) ? colorScale("Radio") : ((i < radio_dots+streaming_dots) ? colorScale("Streaming") : ((i < radio_dots+streaming_dots+reminder_dots) ? colorScale("Reminders") : colorScale("Peer"))))
