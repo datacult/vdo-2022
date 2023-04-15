@@ -93,16 +93,35 @@ let warning = ((selector = '#warning') => {
     
     //Build the graph in here!
 
+    const rectWidth = 50;
+    const rectHeight1 = 100;
+    const rectHeight2 = 200;
+    const rectSpacing = 20;
+    const rectColor = '#1C0D32';
+    const rectX= 50;
 
+    svg.append('rect')
+        .attr('width', rectWidth)
+        .attr('height', rectHeight1)
+        .attr('x', rectX)
+        .attr('y', height - rectHeight1)
+        .attr('fill', rectColor);
+
+    svg.append('rect')
+        .attr('width', rectWidth)
+        .attr('height', rectHeight2)
+        .attr('x', rectX + rectWidth + rectSpacing)
+        .attr('y', height - rectHeight2)
+        .attr('fill', rectColor);
 
 
     // use this code to add annotations
-    svg.append("text")
-        .attr("x", width/2)
-        .attr("y", height/2)
-        .text("Hi Angie, happy coding!")
-        .style("font-size", "40px")
-        .style('text-anchor','middle')
+    // svg.append("text")
+    //     .attr("x", width/2)
+    //     .attr("y", height/2)
+    //     .text("Hi Angie, happy coding!")
+    //     .style("font-size", "40px")
+    //     .style('text-anchor','middle')
 
 
     // // use this code to draw the gradient between the bars
