@@ -61,6 +61,12 @@ let state_programs = ((selector = '#state-programs', data) => {
         .domain([0,250000])
         .range([2,radius])
 
+    var group_space = 50    
+
+    const groupSpaceY = d3.scaleOrdinal()
+        .domain([0,1,2,3])
+        .range([0,184+group_space, 384+group_space*2, 525+group_space*3])
+
     ////////////////////////////////////
     //////////// add to DOM ////////////
     //////////////////////////////////// 
@@ -76,7 +82,7 @@ let state_programs = ((selector = '#state-programs', data) => {
 
     data.forEach((d,j) => {
 
-    var group_width = 235,
+    var group_width = 250,
     per_row = 3
 
     var row = Math.ceil((j+1)/per_row)-1, col = (j)%per_row
@@ -90,7 +96,7 @@ let state_programs = ((selector = '#state-programs', data) => {
     var state_group = svg.append('g')
         .attr('class','state-group')
         .attr('id',d.State)
-        .attr('transform',`translate(${colScale(col)},${row*210})`)
+        .attr('transform',`translate(${colScale(col)},${groupSpaceY(row)})`)
 
     
     state_group.append('image')
@@ -101,7 +107,7 @@ let state_programs = ((selector = '#state-programs', data) => {
         .attr('class','state-name')
         .attr('transform','translate('+left_margin+',20)')
         .text(d.State)
-        .style('font','Barlow')
+        .style('font-family','Barlow Semi Condensed')
         .style('font-size','24px')
         .style('fill','#1C0D32')
 
@@ -109,14 +115,14 @@ let state_programs = ((selector = '#state-programs', data) => {
         .attr('class','total-impressions')
         .attr('transform','translate('+left_margin+',50)')
         .text(convertNum(d.Total)+' M')
-        .style('font','Barlow')
+        .style('font-family','Barlow')
         .style('font-size','16px')
         .style('fill','#1C0D32')
         .style('font-weight','700')
 
     imp_text.append('tspan')
         .text(' Impressions')
-        .style('font','Barlow')
+        .style('font-family','Barlow')
         .style('font-size','16px')
         .style('fill','#1C0D32')
         .style('font-weight','400')
