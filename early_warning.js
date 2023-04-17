@@ -96,24 +96,81 @@ let warning = ((selector = '#warning') => {
     const rectWidth = 50;
     const rectHeight1 = 100;
     const rectHeight2 = 200;
-    const rectSpacing = 20;
+    const rectSpacing = 200;
     const rectColor = '#1C0D32';
     const rectX= 50;
 
+    //Create the first bar
     svg.append('rect')
         .attr('width', rectWidth)
         .attr('height', rectHeight1)
         .attr('x', rectX)
         .attr('y', height - rectHeight1)
-        .attr('fill', rectColor);
-
+        .attr('fill', rectColor)
+        .attr('rx', 10)
+        .attr('ry', 10);
+    
+    //Add the value of the first bar
+    svg.append('text')
+        .text('141,448')
+        .attr('x', rectX + rectWidth / 2)
+        .attr('y', height - rectHeight1 + 20)
+        .style('text-anchor', 'middle')
+        .style('font-size', '14px')
+        .style('fill', 'white');
+    
+    //Add the first bar's x-axis labels
+    svg.append('text')
+        .text('Prior to the SCOTUS decision')
+        .attr('x', rectX + rectWidth / 2)
+        .attr('y', height + 20)
+        .style('text-anchor', 'middle')
+        .style('font-size', '12px')
+        .style('fill', 'black');
+    
+    svg.append('text')
+        .text('June 10 – June 23')
+        .attr('x', rectX + rectWidth / 2)
+        .attr('y', height + 35)
+        .style('text-anchor', 'middle')
+        .style('font-size', '12px')
+        .style('fill', 'black');
+    
+    //Create the second bar
     svg.append('rect')
         .attr('width', rectWidth)
         .attr('height', rectHeight2)
         .attr('x', rectX + rectWidth + rectSpacing)
         .attr('y', height - rectHeight2)
-        .attr('fill', rectColor);
+        .attr('fill', rectColor)
+        .attr('rx', 10)
+        .attr('ry', 10);
 
+    //Add the value of the second bar
+    svg.append('text')
+        .text('644,154')
+        .attr('x', rectX + rectWidth + rectSpacing + rectWidth / 2)
+        .attr('y', height - rectHeight2 + 20)
+        .style('text-anchor', 'middle')
+        .style('font-size', '14px')
+        .style('fill', 'white');
+    
+    //Add the second bar's x-axis labels
+    svg.append('text')
+        .text('After the SCOTUS decision')
+        .attr('x', rectX + rectWidth + rectSpacing + rectWidth / 2)
+        .attr('y', height + 20)
+        .style('text-anchor', 'middle')
+        .style('font-size', '12px')
+        .style('fill', 'black');
+    
+    svg.append('text')
+        .text('June 24 – July 7')
+        .attr('x', rectX + rectWidth + rectSpacing + rectWidth  / 2)
+        .attr('y', height + 35)
+        .style('text-anchor', 'middle')
+        .style('font-size', '12px')
+        .style('fill', 'black');
 
     // use this code to add annotations
     // svg.append("text")
