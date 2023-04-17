@@ -1,0 +1,56 @@
+<!-- 
+    // © 2023 Data Culture
+    // Released under the ISC license.
+    // https://studio.datacult.com/ 
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+
+    <style>
+    /* styling just for local development */
+    #protecting-democracy, .step {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    #protecting-democracy {
+        position: sticky;
+        top: 0;
+    }
+    /* add any local styling here - will be added directly to webflow */
+    
+        
+    </style>
+</head>
+
+<body>
+    <div id="scroll">
+        <div id="protecting-democracy"></div>
+        <div class="step" id="bills-2021"></div>
+        <div class="step" id="bills-2022"></div>
+        <div class="step" id="bills-2023"></div>
+    </div>
+</body>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="protecting_democracy.js"></script>
+<script>
+    async function init() {
+
+        // if we add a dataset we can edit and use this code
+        // let data = await d3.csv('impact.csv', d3.autoType)
+
+        // let mapping = { x: 'date', y: 'Users' }
+
+        let protect_vis = protect("#protecting-democracy")//, data, mapping)
+
+    }
+    init()
+
+</script>
+
+</html>
