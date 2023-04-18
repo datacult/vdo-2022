@@ -93,10 +93,10 @@ let warning = ((selector = '#warning') => {
     
     //Build the graph in here!
 
-    const rectWidth = 50;
-    const rectHeight1 = 100;
-    const rectHeight2 = 200;
-    const rectSpacing = 200;
+    const rectWidth = 80;
+    const rectHeight1 = 141.1;
+    const rectHeight2 = 644.1;
+    const rectSpacing = 380;
     const rectColor = '#1C0D32';
     const rectX= 50;
 
