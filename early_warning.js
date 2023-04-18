@@ -100,6 +100,31 @@ let warning = ((selector = '#warning') => {
     const rectColor = '#1C0D32';
     const rectX= 50;
 
+    // use this code to draw the gradient between the bars
+    var defs = svg.append('defs')
+
+    //add gradient
+    var grad = defs.append('linearGradient')
+        .attr('id','poly-grad')
+        .attr('x1',1)
+        .attr('x2',0)
+        .attr('y1',0)
+        .attr('y2',0.25)
+
+        grad.append('stop')
+        .attr('offset','-11.19%')
+        .attr('stop-color','#D6D6F2')
+
+        grad.append('stop')
+        .attr('offset','105%')
+        .attr('stop-color','#F7F8FF')
+
+    // the path structure is built off of four coordinates with Z closing the shape
+    // learn the structure here https://css-tricks.com/svg-path-syntax-illustrated-guide/
+        svg.append('path')
+        .attr('d',`M${rectX + rectWidth - 10},${height},H${rectX + rectWidth + rectSpacing + 10},V${(height - rectHeight2)},L${rectX + rectWidth - 5},${height - rectHeight1 + 5},Z`)
+        .attr('fill','url(#poly-grad)')
+
     //Create the first bar
     svg.append('rect')
         .attr('width', rectWidth)
@@ -179,33 +204,6 @@ let warning = ((selector = '#warning') => {
     //     .text("Hi Angie, happy coding!")
     //     .style("font-size", "40px")
     //     .style('text-anchor','middle')
-
-
-    // // use this code to draw the gradient between the bars
-    // var defs = svg.append('defs')
-
-    // //add gradient
-    // var grad = defs.append('linearGradient')
-    //     .attr('id','poly-grad')
-    //     .attr('x1',0)
-    //     .attr('x2',0)
-    //     .attr('y1',0)
-    //     .attr('y2',1)
-        
-    //     grad.append('stop')
-    //     .attr('offset','0%')
-    //     .attr('stop-color','#00000033')
-
-    //     grad.append('stop')
-    //     .attr('offset','100%')
-    //     .attr('stop-color','#00000000')
-
-    // // the path structure is built off of four coordinates with Z closing the shape
-    // // learn the structure here https://css-tricks.com/svg-path-syntax-illustrated-guide/
-    //     svg.append('path')
-    //     .attr('d',`M${axis_padding},${y_axis(12.48)},V${top_padding},H${(width-axis_padding)},V${y_axis(12.8)},Z`)
-    //     .attr('fill','url(#poly-grad)')
-
     
     //scroll update function 
     function update() {
