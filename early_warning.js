@@ -142,7 +142,10 @@ let warning = ((selector = '#warning') => {
         .attr('y', height - rectHeight1 + 20)
         .style('text-anchor', 'middle')
         .style('font-size', '14px')
-        .style('fill', 'white');
+        .style('fill', 'white')
+        .style('font-family','Barlow')
+        .style('font-size','18px')
+        .style('font-weight','400');
     
     //Add the first bar's x-axis labels
     svg.append('text')
@@ -151,7 +154,10 @@ let warning = ((selector = '#warning') => {
         .attr('y', height + 20)
         .style('text-anchor', 'middle')
         .style('font-size', '12px')
-        .style('fill', 'black');
+        .style('fill', 'black')
+        .style('font-family','Barlow')
+        .style('font-size','18px')
+        .style('font-weight','700');
     
     svg.append('text')
         .text('June 10 – June 23')
@@ -159,7 +165,10 @@ let warning = ((selector = '#warning') => {
         .attr('y', height + 35)
         .style('text-anchor', 'middle')
         .style('font-size', '12px')
-        .style('fill', 'black');
+        .style('fill', 'black')
+        .style('font-family','Barlow')
+        .style('font-size','18px')
+        .style('font-weight','400');
     
     //Create the second bar
     svg.append('rect')
@@ -178,7 +187,10 @@ let warning = ((selector = '#warning') => {
         .attr('y', height - rectHeight2 + 20)
         .style('text-anchor', 'middle')
         .style('font-size', '14px')
-        .style('fill', 'white');
+        .style('fill', 'white')
+        .style('font-family','Barlow')
+        .style('font-size','18px')
+        .style('font-weight','400');
     
     //Add the second bar's x-axis labels
     svg.append('text')
@@ -187,7 +199,10 @@ let warning = ((selector = '#warning') => {
         .attr('y', height + 20)
         .style('text-anchor', 'middle')
         .style('font-size', '12px')
-        .style('fill', 'black');
+        .style('fill', 'black')
+        .style('font-family','Barlow')
+        .style('font-size','18px')
+        .style('font-weight','700');
     
     svg.append('text')
         .text('June 24 – July 7')
@@ -195,7 +210,10 @@ let warning = ((selector = '#warning') => {
         .attr('y', height + 35)
         .style('text-anchor', 'middle')
         .style('font-size', '12px')
-        .style('fill', 'black');
+        .style('fill', 'black')
+        .style('font-family','Barlow')
+        .style('font-size','18px')
+        .style('font-weight','400');
 
     // use this code to add annotations
     // svg.append("text")
