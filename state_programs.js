@@ -103,7 +103,7 @@ let state_programs = ((selector = '#state-programs', data) => {
 
         state_group.append('image')
             .attr('class', 'state-outline')
-            .attr('href', 'assets/states/' + d.State + '.svg')
+            .attr('href', 'https://datacult.github.io/vdo-2022/assets/states/' + d.State + '.svg')
 
         state_group.append('text')
             .attr('class', 'state-name')
