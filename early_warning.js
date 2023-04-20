@@ -58,11 +58,35 @@ let warning = ((selector = '#warning') => {
         
             function handleVisits(entry, observer) {
                 if (entry[0].intersectionRatio > .5) {
-                    update()
+                    update(1)
                 }
             };
         
             visitsObserver.observe(visits);
+
+            const registrations = document.querySelector('#registrations');
+    
+            const registrationsObserver = new IntersectionObserver(handleRegistrations, options);
+        
+            function handleRegistrations(entry, observer) {
+                if (entry[0].intersectionRatio > .5) {
+                    update(2)
+                }
+            };
+        
+            registrationsObserver.observe(registrations);
+
+            const states = document.querySelector('#states');
+    
+            const statesObserver = new IntersectionObserver(handleStates, options);
+        
+            function handleStates(entry, observer) {
+                if (entry[0].intersectionRatio > .5) {
+                    update(3)
+                }
+            };
+        
+            statesObserver.observe(states);
 
     ////////////////////////////////////
     //////////// Scales ////////////
@@ -77,8 +101,8 @@ let warning = ((selector = '#warning') => {
 
 
     // Add Y axis scale
-    const yScale = d3.scaleLinear()
-        .domain([0, 100000])
+    var yScale = d3.scaleLinear()
+        .domain([0, 700000])
         .range([height, 0]);
 
     ////////////////////////////////////
@@ -94,8 +118,10 @@ let warning = ((selector = '#warning') => {
     //Build the graph in here!
 
     const rectWidth = 80;
-    const rectHeight1 = 141.1;
-    const rectHeight2 = 644.1;
+    // const rectHeight1 = 141.1;
+    const rectHeight1 = yScale(141448);
+    // const rectHeight2 = 644.1;
+    const rectHeight2 = yScale(644154);
     const rectSpacing = 380;
     const rectColor = '#1C0D32';
     const rectX= 50;
@@ -121,25 +147,28 @@ let warning = ((selector = '#warning') => {
 
     // the path structure is built off of four coordinates with Z closing the shape
     // learn the structure here https://css-tricks.com/svg-path-syntax-illustrated-guide/
-        svg.append('path')
-        .attr('d',`M${rectX + rectWidth - 10},${height},H${rectX + rectWidth + rectSpacing + 10},V${(height - rectHeight2)},L${rectX + rectWidth - 5},${height - rectHeight1 + 5},Z`)
+    svg.append('path')
+        .attr('id', 'gradient')
+        .attr('d',`M${rectX + rectWidth - 10},${height},H${rectX + rectWidth + rectSpacing + 10},V${(rectHeight2)},L${rectX + rectWidth - 5},${rectHeight1 + 5},Z`)
         .attr('fill','url(#poly-grad)')
 
     //Create the first bar
     svg.append('rect')
+        .attr('id', 'bar1')
         .attr('width', rectWidth)
-        .attr('height', rectHeight1)
+        .attr('height', height - rectHeight1)
         .attr('x', rectX)
-        .attr('y', height - rectHeight1)
+        .attr('y', rectHeight1)
         .attr('fill', rectColor)
         .attr('rx', 10)
         .attr('ry', 10);
     
     //Add the value of the first bar
     svg.append('text')
+        .attr('id', 'bar1text')
         .text('141,448')
         .attr('x', rectX + rectWidth / 2)
-        .attr('y', height - rectHeight1 + 20)
+        .attr('y', rectHeight1 + 30)
         .style('text-anchor', 'middle')
         .style('font-size', '14px')
         .style('fill', 'white')
@@ -151,7 +180,7 @@ let warning = ((selector = '#warning') => {
     svg.append('text')
         .text('Prior to the SCOTUS decision')
         .attr('x', rectX + rectWidth / 2)
-        .attr('y', height + 20)
+        .attr('y', height + 30)
         .style('text-anchor', 'middle')
         .style('font-size', '12px')
         .style('fill', 'black')
@@ -162,7 +191,7 @@ let warning = ((selector = '#warning') => {
     svg.append('text')
         .text('June 10 – June 23')
         .attr('x', rectX + rectWidth / 2)
-        .attr('y', height + 35)
+        .attr('y', height + 55)
         .style('text-anchor', 'middle')
         .style('font-size', '12px')
         .style('fill', 'black')
@@ -172,19 +201,21 @@ let warning = ((selector = '#warning') => {
     
     //Create the second bar
     svg.append('rect')
+        .attr('id', 'bar2')
         .attr('width', rectWidth)
-        .attr('height', rectHeight2)
+        .attr('height', height - rectHeight2)
         .attr('x', rectX + rectWidth + rectSpacing)
-        .attr('y', height - rectHeight2)
+        .attr('y', rectHeight2)
         .attr('fill', rectColor)
         .attr('rx', 10)
         .attr('ry', 10);
 
     //Add the value of the second bar
     svg.append('text')
+        .attr('id', 'bar2text')
         .text('644,154')
         .attr('x', rectX + rectWidth + rectSpacing + rectWidth / 2)
-        .attr('y', height - rectHeight2 + 20)
+        .attr('y', rectHeight2 + 30)
         .style('text-anchor', 'middle')
         .style('font-size', '14px')
         .style('fill', 'white')
@@ -196,7 +227,7 @@ let warning = ((selector = '#warning') => {
     svg.append('text')
         .text('After the SCOTUS decision')
         .attr('x', rectX + rectWidth + rectSpacing + rectWidth / 2)
-        .attr('y', height + 20)
+        .attr('y', height + 30)
         .style('text-anchor', 'middle')
         .style('font-size', '12px')
         .style('fill', 'black')
@@ -207,7 +238,7 @@ let warning = ((selector = '#warning') => {
     svg.append('text')
         .text('June 24 – July 7')
         .attr('x', rectX + rectWidth + rectSpacing + rectWidth  / 2)
-        .attr('y', height + 35)
+        .attr('y', height + 55)
         .style('text-anchor', 'middle')
         .style('font-size', '12px')
         .style('fill', 'black')
@@ -224,7 +255,47 @@ let warning = ((selector = '#warning') => {
     //     .style('text-anchor','middle')
     
     //scroll update function 
-    function update() {
+    function update(step) {
+        console.log(step)
+        if(step==1) {
+
+        } else if(step==2) {
+            yScale = d3.scaleLinear()
+            .domain([0, 45000])
+            .range([height, 0]);
+
+            d3.select('#gradient')
+                .transition()
+                .duration(1000)
+                .attr('d',`M${rectX + rectWidth - 10},${height},H${rectX + rectWidth + rectSpacing + 10},V${(yScale(37171))},L${rectX + rectWidth - 5},${yScale(8583) + 5},Z`);
+
+            d3.select('#bar1')
+                .transition()
+                .duration(1000)
+                .attr('y', yScale(8583))
+                .attr('height', height-yScale(8583));
+            
+            d3.select('#bar1text')
+                .transition()
+                .duration(1000)
+                .text('8,583')
+                .attr('y', yScale(8583) + 30);  
+                
+            d3.select('#bar2')
+                .transition()
+                .duration(1000)
+                .attr('y', yScale(37171))
+                .attr('height', height-yScale(37171));
+            
+            d3.select('#bar2text')
+                .transition()
+                .duration(1000)
+                .text('37,171')
+                .attr('y', yScale(37171) + 30);
+
+        } else {
+
+        }
         // this is where we'll add in the functions to change the graph states on scroll
         // DON'T WORRY ABOUT THIS FOR NOW!
 
