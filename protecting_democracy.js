@@ -24,12 +24,12 @@ let protect = ((selector = '#protecting-democracy') => {
     } : {
         left: 50,
         right: 50,
-        top: 100,
+        top: 75,
         bottom: 100
     }
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
-    const svgWidth = isMobile ? screen.width*1.5 : 815
+    const svgWidth = isMobile ? screen.width*1.5 : 800
     const svgHeight = isMobile ? screen.height*1.2 : 650
 
     // helper calculated variables for inner width & height
