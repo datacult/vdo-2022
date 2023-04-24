@@ -179,8 +179,8 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
         .attr('id',"campus-image1")
         .attr('class',"campus-image")
         .attr('href','https://datacult.github.io/vdo-2022/assets/youth/campus4.svg')
-        .attr('x',width*0.63)
-        .attr('y',-10)
+        .attr('x',width*0.66)
+        .attr('y',-20)
 
     svg.append("image")
         .attr('id',"campus-image3")
@@ -193,12 +193,33 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
         .attr('id',"campus-image2")
         .attr('class',"campus-image")
         .attr('href','https://datacult.github.io/vdo-2022/assets/youth/campus3.svg')
-        .attr('x',0)
-        .attr('y',height*0.4)
+        .attr('x',10)
+        .attr('y',height*0.5)
 
-        d3.selectAll('.campus-image').attr('opacity',0)
+    d3.selectAll('.campus-image').attr('opacity',0)
 
-    for (let i = 0; i < 9; i++) {
+    var inf_lines = [{"x":1,"y":3},
+                     {"x":2,"y":2},
+                     {"x":3,"y":1},
+                     {"x":4,"y":2},
+                     {"x":5,"y":3},
+                     {"x":1,"y":5},
+                     {"x":2,"y":6},
+                     {"x":3,"y":7},
+                     {"x":4,"y":6},
+                     {"x":5,"y":5}],
+        inf_images = [{"x":0.25,"y":1,"file":'gif'},
+                     {"x":1.3,"y":0,"file":'svg'},
+                     {"x":2.6,"y":-1.5,"file":'svg'},
+                     {"x":3.75,"y":-0.5,"file":'svg'},
+                     {"x":4.8,"y":0.8,"file":'gif'},
+                     {"x":0.5,"y":4.5,"file":'svg'},
+                     {"x":1.5,"y":6,"file":'svg'},
+                     {"x":2.6,"y":6.8,"file":'gif'},
+                     {"x":3.85,"y":5.5,"file":'svg'},
+                     {"x":4.75,"y":4,"file":'svg'}]
+
+    for (let i = 0; i < 10; i++) {
         svg.append("line")
             .attr('id',"inf-line"+i)
             .attr('class',"inf-line")
@@ -207,7 +228,16 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
             .attr('y1',height/2)
             .attr('x2',width/2)
             .attr('y2',height/2)
+
+        svg.append("image")
+            .attr('id',"inf-image"+i)
+            .attr('class',"inf-image")
+            .attr('href',`https://datacult.github.io/vdo-2022/assets/youth/Micro-influencer-${i}.${inf_images[i].file}`)
+            .attr('transform',`translate (${width*(inf_images[i].x)/6}, ${height*(inf_images[i].y)/8})`)
+            .attr('height',150)
     }
+
+    d3.selectAll('.inf-image').attr('opacity',0)
 
     // add circle
     var data_circle = svg.append("circle")
@@ -307,27 +337,38 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
 
                 d3.select('#campus-line0')
                     .transition()
-                    .duration(1500)
+                    .duration(2500)
                     .attr('x2',width/4)
                     .attr('y2',height/4)
 
                 d3.select('#campus-line1')
                     .transition()
-                    .duration(1500)
+                    .duration(2500)
                     .attr('x2',width*3/4)
                     .attr('y2',height/4)
                 
                 d3.select('#campus-line2')
                     .transition()
-                    .duration(1500)
+                    .duration(2500)
                     .attr('x2',width/4)
                     .attr('y2',height*3/4)
 
                 d3.select('#campus-line3')
                     .transition()
-                    .duration(1500)
+                    .duration(2500)
                     .attr('x2',width*3/4-50)
                     .attr('y2',height*3/4)
+
+                d3.selectAll('.inf-image')
+                    .transition()
+                    .duration(500)
+                    .attr('opacity',0)
+
+                d3.selectAll('.inf-line')
+                    .transition()
+                    .duration(500)
+                    .attr('x2',width/2)
+                    .attr('y2',height/2)
 
                 d3.selectAll('.country')
                     .transition()
@@ -365,6 +406,20 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                     .attr('x2',width/2)
                     .attr('y2',height/2)
 
+                d3.selectAll('.inf-image')
+                    .transition()
+                    .duration(1500)
+                    .attr('opacity',1)
+
+                inf_lines.forEach((line,i) => {
+                    d3.select('#inf-line'+i)
+                    .transition()
+                    .duration(2500)
+                    .attr('x2',width*(line.x)/6)
+                    .attr('y2',height*(line.y)/8)
+                });
+                
+
                 d3.selectAll('.country')
                     .transition()
                     .duration(1500)
@@ -396,6 +451,17 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                     .attr('opacity',0)
 
                 d3.selectAll('.campus-line')
+                    .transition()
+                    .duration(500)
+                    .attr('x2',width/2)
+                    .attr('y2',height/2)
+
+                d3.selectAll('.inf-image')
+                    .transition()
+                    .duration(500)
+                    .attr('opacity',0)
+
+                d3.selectAll('.inf-line')
                     .transition()
                     .duration(500)
                     .attr('x2',width/2)
