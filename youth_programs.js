@@ -16,12 +16,13 @@ let youth = ((selector = '#youth-programs') => {
     body.html("")
 
     // margins for SVG
-    const margin = isMobile ? {
-        left: 75,
-        right: 50,
-        top: 50,
-        bottom: 50
-    } : {
+    const margin = //isMobile ? {
+    //     left: 75,
+    //     right: 50,
+    //     top: 50,
+    //     bottom: 50
+    // } : 
+    {
         left: 100,
         right: 100,
         top: 100,
@@ -29,8 +30,10 @@ let youth = ((selector = '#youth-programs') => {
     }
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
-    const svgWidth = isMobile ? screen.width*1.5 : 920
-    const svgHeight = isMobile ? screen.height*1.2 : 650
+    // const svgWidth = isMobile ? screen.width*1.5 : 920
+    // const svgHeight = isMobile ? screen.height*1.2 : 650
+    const svgWidth = 920
+    const svgHeight = 650
 
     // helper calculated variables for inner width & height
     const height = svgHeight - margin.top - margin.bottom
@@ -110,23 +113,22 @@ let youth = ((selector = '#youth-programs') => {
         var scl = 0.2, mult = 2.3
         var projection = d3.geoAlbersUsa()
         .scale(width / scl / Math.PI)
-        // .translate([width*mult+125, height*mult-160]);
         .translate([370, 240]);
 
         // variables
-        var circ_rad = 5, ak_trans = 'translate(0 0)', ak_scl = 1, hi_trans = 'translate(0 -20)', hi_scl = 1, icon_size = 30;
+        var ak_trans = 'translate(0 0)', ak_scl = 1, hi_trans = 'translate(0 -20)', hi_scl = 1;
 
         } else {
          
         // Map and projection
-        var scl = 0.32, mult = 1.55
-        var projection = d3.geoMercator()
+        var scl = 0.182, mult = 2.3
+        var projection = d3.geoAlbersUsa()
         .scale(width / scl / Math.PI)
-        .translate([width*mult+245, height*mult-200]);
+        .translate([355, 240]);
 
         // variables
-        var circ_rad = 2.5, ak_trans = 'translate(175 360)', ak_scl = 0.5, hi_trans = 'translate(670 -260)', hi_scl = 2, icon_size = 25;
-    }
+        var ak_trans = 'translate(0 0)', ak_scl = 1, hi_trans = 'translate(0 -20)', hi_scl = 1;
+        }
 
     // Load external data and boot
 d3.json("https://raw.githubusercontent.com/loganpowell/census-geojson/master/GeoJSON/500k/2021/state.json").then( function(geodata) {
