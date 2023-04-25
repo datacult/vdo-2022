@@ -198,6 +198,8 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
 
     d3.selectAll('.campus-image').attr('opacity',0)
 
+    var defs = svg.append('defs')
+
     var inf_lines = [{"x":1,"y":3},
                      {"x":2,"y":2},
                      {"x":3,"y":1},
@@ -208,8 +210,8 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                      {"x":3,"y":7},
                      {"x":4,"y":6},
                      {"x":5,"y":5}],
-        inf_images = [{"x":0.25,"y":1,"file":'gif'},
-                     {"x":1.3,"y":0,"file":'svg'},
+        inf_images = [{"x":0.3,"y":1,"file":'gif'},
+                     {"x":1.4,"y":0,"file":'svg'},
                      {"x":2.6,"y":-1.5,"file":'svg'},
                      {"x":3.75,"y":-0.5,"file":'svg'},
                      {"x":4.8,"y":0.8,"file":'gif'},
@@ -218,9 +220,41 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                      {"x":2.6,"y":6.8,"file":'gif'},
                      {"x":3.85,"y":5.5,"file":'svg'},
                      {"x":4.75,"y":4,"file":'svg'}]
+    var inf_height = 150, inf_width = 80, rect_padding = 3
+
+    var inf_groups = svg.append('g').attr('id','inf_groups')
 
     for (let i = 0; i < 10; i++) {
-        svg.append("line")
+
+        // var inf_group = inf_groups.append('g')
+        //             .attr('id','inf_group'+i)
+        //             .attr('class','inf_group')
+
+        var mask =  defs
+				.append("clipPath")
+				.attr("id", "logo-clip-" +i)
+				.attr('class', 'logo-clip')
+
+			mask
+				.append("rect")
+				.attr('class','logo-clip-rect')
+				.attr('width', inf_width)
+				.attr('height', inf_height)
+				.attr('rx', 10);
+
+        inf_groups.append("rect")
+            .attr('id','inf-rect'+i)
+            .attr('class',"inf-group")
+            .attr('width', inf_width+2*rect_padding)
+            .attr('height', inf_height+2*rect_padding)
+            .attr('x',width*(inf_images[i].x)/6-rect_padding)
+            .attr('y',height*(inf_images[i].y)/8-rect_padding)
+            .attr('rx', 12)
+            .attr('fill','none')
+            .attr('stroke','#8979CC')
+            .attr('stroke-width','2.5px');
+
+        inf_groups.append("line")
             .attr('id',"inf-line"+i)
             .attr('class',"inf-line")
             .attr('stroke','#6941bd')
@@ -229,15 +263,16 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
             .attr('x2',width/2)
             .attr('y2',height/2)
 
-        svg.append("image")
+        inf_groups.append("image")
             .attr('id',"inf-image"+i)
-            .attr('class',"inf-image")
+            .attr('class',"inf-group")
             .attr('href',`https://datacult.github.io/vdo-2022/assets/youth/Micro-influencer-${i}.${inf_images[i].file}`)
             .attr('transform',`translate (${width*(inf_images[i].x)/6}, ${height*(inf_images[i].y)/8})`)
             .attr('height',150)
+            .attr("clip-path", `url(#logo-clip-${i})`)
     }
 
-    d3.selectAll('.inf-image').attr('opacity',0)
+    d3.selectAll('.inf-group').attr('opacity',0)
 
     // add circle
     var data_circle = svg.append("circle")
@@ -359,7 +394,7 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                     .attr('x2',width*3/4-50)
                     .attr('y2',height*3/4)
 
-                d3.selectAll('.inf-image')
+                d3.selectAll('.inf-group')
                     .transition()
                     .duration(500)
                     .attr('opacity',0)
@@ -406,7 +441,7 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                     .attr('x2',width/2)
                     .attr('y2',height/2)
 
-                d3.selectAll('.inf-image')
+                d3.selectAll('.inf-group')
                     .transition()
                     .duration(1500)
                     .attr('opacity',1)
@@ -456,7 +491,7 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                     .attr('x2',width/2)
                     .attr('y2',height/2)
 
-                d3.selectAll('.inf-image')
+                d3.selectAll('.inf-group')
                     .transition()
                     .duration(500)
                     .attr('opacity',0)
