@@ -1,0 +1,65 @@
+<!-- 
+    // © 2023 Data Culture
+    // Released under the ISC license.
+    // https://studio.datacult.com/ 
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=Barlow+Semi+Condensed:wght@400;500;600;700&family=Barlow:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* styling just for local development */
+        #scroll {
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #youth_share {
+            width: 1000px;
+        }
+
+        body {
+            font-family: 'Barlow Semi Condensed';
+            background: linear-gradient(#3F2687, #1C0D32);
+        }
+
+        /* add any local styling here - will be added directly to webflow */
+    </style>
+</head>
+
+<body>
+    <div id="scroll">
+        <div id="youth_share"></div>
+        <div id="youth_share_state"></div>
+    </div>
+</body>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="youth_share.js"></script>
+<script src="youth_share_state.js"></script>
+<script>
+    async function init() {
+
+        // if we add a dataset we can edit and use this code
+        let data = await d3.csv('state_programs.csv', d3.autoType)
+
+        // let mapping = { x: 'date', y: 'Users' }
+
+        let youth_share_vis = youth_share("#youth_share", data)
+        let state_vis = youth_share_state("#youth_share_state", data)
+
+    }
+    init()
+
+</script>
+
+</html>
