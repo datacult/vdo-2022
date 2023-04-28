@@ -23,19 +23,19 @@ let youth_share = ((selector = '#youth_share', data) => {
     // margins for SVG
     const margin = isMobile ? {
         left: 200,
-        right: 50,
+        right: 200,
         top: 50,
         bottom: 50
     } : {
         left: 200,
-        right: 50,
+        right: 200,
         top: 50,
         bottom: 50
     }
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
     const svgWidth = isMobile ? screen.width * 1.5 : 1000
-    const svgHeight = isMobile ? screen.height * 1.2 : 300
+    const svgHeight = isMobile ? screen.height * 1.2 : 250
 
     // helper calculated variables for inner width & height
     const height = svgHeight - margin.top - margin.bottom
@@ -48,7 +48,6 @@ let youth_share = ((selector = '#youth_share', data) => {
         .append('svg')
         .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
         .append('g')
-        // .attr('id','map-group')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
     ////////////////////////////////////
@@ -62,7 +61,7 @@ let youth_share = ((selector = '#youth_share', data) => {
 
     // Define the bar chart scales
     const x = d3.scaleLinear().range([0, width]);
-    const y = d3.scaleBand().range([0, height]).padding(0.1);
+    const y = d3.scaleBand().range([0, height]).paddingInner(0.3).paddingOuter(0.1);
 
     // Set the scale domains based on the data
     x.domain([0, d3.max(data, (d) => d.value)]);
@@ -103,7 +102,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .text(d => d.value + "%")
 
     svg.append("text")
-        .attr("x", -10)
+        .attr("x", -15)
         .attr("y", y("A") + (y.bandwidth() / 2) - 10)
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
@@ -111,7 +110,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .text("Avg. youth share");
 
     svg.append("text")
-        .attr("x", -10)
+        .attr("x", -15)
         .attr("y", y("A") + (y.bandwidth() / 2) + 10)
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
@@ -119,7 +118,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .text("of the vote");
 
     svg.append("text")
-        .attr("x", -10)
+        .attr("x", -15)
         .attr("y", y("B") + (y.bandwidth() / 2) - 10)
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
@@ -127,7 +126,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .text("Avg. margins");
 
     svg.append("text")
-        .attr("x", -10)
+        .attr("x", -15)
         .attr("y", y("B") + (y.bandwidth() / 2) + 10)
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")

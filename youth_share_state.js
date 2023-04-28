@@ -66,7 +66,6 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
         .append('svg')
         .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
         .append('g')
-        // .attr('id','map-group')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
     ////////////////////////////////////
@@ -95,13 +94,13 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
 
         var group_width = 250,
             per_row = 3,
-            bar_transpose = 70
+            bar_transpose = 60
 
         var row = Math.ceil((j + 1) / per_row) - 1, col = (j) % per_row
 
         // Define the bar chart scales
-        let x = d3.scaleLinear().range([0, group_width - left_margin]);
-        let y = d3.scaleBand().range([0, height / (per_row * 4)]).padding(0.1);
+        let x = d3.scaleLinear().range([0, group_width - left_margin - 40]);
+        let y = d3.scaleBand().range([0, height / (per_row * 4)]).paddingInner(0.3).paddingOuter(0.1);
 
         // Set the scale domains based on the data
         x.domain([0, 13]);
@@ -128,21 +127,22 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .attr('transform', 'translate(' + left_margin + ',20)')
             .text(d.state)
             .style('font-family', 'Barlow Semi Condensed')
-            .style('font-size', '24px')
+            .style('font-size', '18px')
+            .style('font-weight', '500')
             .style('fill', "#ffffff")
 
         var imp_text = state_group.append('text')
             .attr('class', 'difference')
-            .attr('transform', 'translate(' + left_margin + ',50)')
+            .attr('transform', 'translate(' + left_margin + ',40)')
             .text(d.difference + '%')
             .style('font-family', 'Barlow')
-            .style('font-size', '16px')
+            .style('font-size', '11px')
             .style('fill', '#ffffff')
 
         imp_text.append('tspan')
             .text(' difference')
             .style('font-family', 'Barlow')
-            .style('font-size', '16px')
+            .style('font-size', '11px')
             .style('fill', '#ffffff')
 
         let bars = state_group
@@ -169,6 +169,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .attr("text-anchor", d => d.category == "A" ? "end" : "start")
             .attr("fill", d => d.category == "A" ? "#000000" : "#D6D6F2")
             .style('font-size', '0.5em')
+            .style('font-weight', '500')
             .attr("opacity", 0)
             .text(d => d.value + "%")
 
@@ -178,7 +179,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .delay(function (d, i) { return transition_time * i; })
             .duration(transition_time)
             .attr("width", (d) => x(d.value))
-            .attr("d", (d) => rightRoundedRect(left_margin, y(d.category) + bar_transpose, x(d.value), y.bandwidth(), 5));
+            .attr("d", (d) => rightRoundedRect(left_margin, y(d.category) + bar_transpose, x(d.value), y.bandwidth(), 3));
 
         bar_text
             .transition()
@@ -196,6 +197,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .attr("x2", left_margin)
             .attr("y1", bar_transpose)
             .attr("y2", bar_transpose + (height / (per_row * 4)))
+            .attr("stroke-width", 0.5)
             .attr("stroke", "white");
 
     });
