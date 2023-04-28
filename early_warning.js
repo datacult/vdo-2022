@@ -319,6 +319,83 @@ let warning = ((selector = '#warning') => {
         .attr('dy',line_height)
         .attr('x',rectX);
 
+    var textChart2 = svg.append('text')
+        .attr('id','textChart2')
+        .style('text-anchor','left')
+        .attr('y',rectHeight2)
+        .style('fill',annot_font_fill)
+        .style('font-family',font_family)
+        .style('font-size',font_size)
+        .style('font-weight',font_reg_weight)
+        .style('opacity',0);
+
+    textChart2.append('tspan')
+        .text('Six states with abortion measures on the ballot saw')
+        .attr('y',rectHeight2 + 100)
+        .attr('dy',line_height)
+        .attr('x',rectX);
+
+    textChart2.append('tspan')
+        .text('over a 430% increase in Vote.org tool users.')
+        .attr('dy',line_height)
+        .attr('x',rectX);
+
+    textChart2.append('tspan')
+        .text('We saw a nearly 1000% increase')
+        .attr('y',rectHeight2 + 190)
+        .attr('x',rectX);
+
+    textChart2.append('tspan')
+        .text('in registrations in Kansas alone.')
+        .attr('dy',line_height)
+        .attr('x',rectX);
+
+    var textStates = svg.append('text')
+        .attr('id','textStates')
+        .style('text-anchor','left')
+        .attr('x',rectX + rectWidth + rectSpacing + 100)
+        .attr('y',rectHeight2 + 30)
+        .style('fill',annot_font_fill)
+        .style('font-family',font_family)
+        .style('font-size',font_size)
+        .style('font-weight',font_reg_weight)
+        .style('opacity',0);
+
+    textStates.append('tspan')
+        .attr('id','kentucky')
+        .text('Kentucky')
+        .attr('x',rectX + rectWidth + rectSpacing + 100);
+
+    textStates.append('tspan')
+        .attr('id','michigan')
+        .text('Michigan')
+    //     .attr('y',y(24424))
+        .attr('x',rectX + rectWidth + rectSpacing + 100);
+
+    textStates.append('tspan')
+        .attr('id','kansas')
+        .text('Kansas')
+        // .attr('y',y(27341))
+        .attr('x',rectX + rectWidth + rectSpacing + 100);
+
+    textStates.append('tspan')
+        .attr('id','california')
+        .text('California')
+        // .attr('y',y(28351))
+        .attr('x',rectX + rectWidth + rectSpacing + 100);
+
+    textStates.append('tspan')
+        .attr('id','montana')
+        .text('Montana')
+        // .attr('y',y(28620))
+        .attr('x',rectX + rectWidth + rectSpacing + 100);
+
+    textStates.append('tspan')
+        .attr('id','vermont')
+        .text('Vermont')
+        // .attr('y',y(28781))
+        .attr('x',rectX + rectWidth + rectSpacing + 100);
+
     var textGradient = svg.append('text')
         .attr('id','textGradient')
         .attr('x',width/2)
@@ -374,6 +451,28 @@ let warning = ((selector = '#warning') => {
         .attr('dy',line_height)
         .attr('x',width/2);
 
+    var textGradient3 = svg.append('text')
+        .attr('id','textGradient3')
+        .attr('x',width/2)
+        .attr('y',height - 177)
+        .style('text-anchor','middle')
+        .style('fill',annot_font_fill)
+        .style('font-family',font_family)
+        .style('font-size',font_size)
+        .style('font-weight',font_bold_weight)
+        .style('opacity',0);
+
+    textGradient3.append('tspan')
+        .attr('id','percentage')
+        .text('+ 430%');
+
+    textGradient3.append('tspan')
+        .attr('id','annotationline1')
+        .text('increase in Vote.org tool users')
+        .attr('dy',line_height)
+        .attr('x',width/2)
+        .attr('y',height - 162);
+
     //bar update function 
     function update_bar(data, step) {
         stackedData = d3.stack()
@@ -425,10 +524,15 @@ let warning = ((selector = '#warning') => {
             // d3.select('#annotationline2')
             //     .text('Vote.org visits');
 
+            textChart2.style('opacity',0)
+
             textGradient
             .transition()
             .duration(1500).style('opacity',1)
             textGradient2.style('opacity',0)
+            textGradient3.style('opacity',0)
+
+            textStates.style('opacity',0)
 
             // d3.select('#gradient')
             //     .transition()
@@ -446,6 +550,7 @@ let warning = ((selector = '#warning') => {
                 .duration(1500)
                 .text('141,448')
                 .style('opacity',1)
+                .style('fill',bar_font_fill)
                 .attr('y',y(141448) + 30);  
                 
             // d3.select('#bar2')
@@ -464,6 +569,7 @@ let warning = ((selector = '#warning') => {
                 .duration(1500)
                 .text('644,154')
                 .style('opacity',1)
+                .style('fill',bar_font_fill)
                 .attr('y',y(644154) + 30);
 
 
@@ -481,10 +587,19 @@ let warning = ((selector = '#warning') => {
             // d3.select('#annotationline2')
             //     .text('site to register to vote');
 
+            textChart2
+            .transition()
+            .duration(700).style('opacity',0)
+
             textGradient.style('opacity',0)
             textGradient2
             .transition()
             .duration(1500).style('opacity',1)
+            textGradient3.style('opacity',0)
+
+            textStates
+            .transition()
+            .duration(700).style('opacity',0)
 
             // d3.select('#gradient')
             //     .transition()
@@ -502,6 +617,7 @@ let warning = ((selector = '#warning') => {
                 .duration(1500)
                 .text('8,583')
                 .style('opacity',1)
+                .style('fill',bar_font_fill)
                 .attr('y',y(8583) + 30);  
                 
             // d3.select('#bar2')
@@ -520,6 +636,7 @@ let warning = ((selector = '#warning') => {
                 .duration(1500)
                 .text('37,171')
                 .style('opacity',1)
+                .style('fill',bar_font_fill)
                 .attr('y',y(37171) + 30);
 
         } else {
@@ -528,8 +645,37 @@ let warning = ((selector = '#warning') => {
             .domain([0, 35000])
             .range([height, 0]);
 
+            textChart2
+            .transition()
+            .duration(1500).style('opacity',1)
+
             textGradient.style('opacity',0)
             textGradient2.style('opacity',0)
+            textGradient3
+            .transition()
+            .duration(1500).style('opacity',1)
+
+            textStates
+            .transition()
+            .duration(1500).style('opacity',1)
+
+            d3.select('#kansas')
+                .attr('y',y(17341/2));
+
+            d3.select('#michigan')
+                .attr('y',y(17341+(7083/2)));
+
+            d3.select('#california')
+                .attr('y',y(17341+7083+(2917/2)));
+
+            d3.select('#kentucky')
+                .attr('y',y(17341+7083+2917+(1010/2)));
+
+            d3.select('#montana')
+                .attr('y',y(17341+7083+2917+1010+(269/2)));
+
+            d3.select('#vermont')
+                .attr('y',y(17341+7083+2917+1010+269+(161/2)));
 
             // d3.select('#gradient')
             //     .transition()
@@ -545,9 +691,10 @@ let warning = ((selector = '#warning') => {
             d3.select('#bar1text')
                 .transition()
                 .duration(1500)
-                .text('8,583')
-                .style('opacity',0)
-                .attr('y',y(8583) + 30);  
+                .text('4,324')
+                .style('opacity',1)
+                .style('fill',annot_font_fill)
+                .attr('y',y(4324) - 10);  
                 
             // d3.select('#bar2')
             //     .transition()
@@ -564,9 +711,11 @@ let warning = ((selector = '#warning') => {
             d3.select('#bar2text')
                 .transition()
                 .duration(1500)
-                .text('37,171')
-                .style('opacity',0)
-                .attr('y',y(37171) + 30);
+                .text('28,771')
+                .style('opacity',1)
+                .style('fill',annot_font_fill)
+                .attr('y',y(28771) - 10);
+                
 
         }
 
