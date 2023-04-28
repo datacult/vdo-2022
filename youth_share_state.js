@@ -51,7 +51,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
     const svgWidth = isMobile ? screen.width * 1.5 : 1000
-    const svgHeight = isMobile ? screen.height * 1.2 : 900
+    const svgHeight = isMobile ? screen.height * 1.2 : 200
 
     // helper calculated variables for inner width & height
     const height = svgHeight - margin.top - margin.bottom
@@ -100,7 +100,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
 
         // Define the bar chart scales
         let x = d3.scaleLinear().range([0, group_width - left_margin - 40]);
-        let y = d3.scaleBand().range([0, height / (per_row * 4)]).paddingInner(0.3).paddingOuter(0.1);
+        let y = d3.scaleBand().range([0, height / (per_row*0.6)]).paddingInner(0.3).paddingOuter(0.1);
 
         // Set the scale domains based on the data
         x.domain([0, 13]);
@@ -196,7 +196,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .attr("x1", left_margin)
             .attr("x2", left_margin)
             .attr("y1", bar_transpose)
-            .attr("y2", bar_transpose + (height / (per_row * 4)))
+            .attr("y2", bar_transpose + (height / (per_row * 0.6)))
             .attr("stroke-width", 0.5)
             .attr("stroke", "white");
 
