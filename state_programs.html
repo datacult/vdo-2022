@@ -35,30 +35,30 @@
         /* add any local styling here - will be added directly to webflow */
 
         div.tooltip {
+            font-family: 'Barlow';
             position: absolute;
-            padding: 10px;
-            background: white;
+            padding: 10px 15px;
+            background: #F7F8FF;
             border: 0px;
-            border-radius: 10px;
+            border-radius: 20px;
             pointer-events: none;
             opacity: 0;
-            filter: drop-shadow(0px 5px 5px rgba(0, 0, 0, 0.3));
+            box-shadow: 0px 2px 20px 0px rgba(28, 13, 50, 0.25);
         }
 
         .tootlip-program-title {
             display: inline-block;
-            width: 120px;
+            width: 140px;
             padding-left: 10px;
         }
 
         .tootlip-impressions-title {
             display: inline-block;
-            width: 140px;
+            width: 160px;
         }
 
         #state-program-tooltip > * {
-            margin: 5px;
-            font-size: 0.8em;
+            margin: 7px;
         }
 
         .dot {
@@ -78,7 +78,7 @@
         <div id="state-name" style="font-weight: bold;"></div>
         <div>
             <span class="tootlip-impressions-title">Total Impressions</span>
-            <span id="total-impressions" style="font-weight: bold; font-size: 1.2em;"></span>
+            <span id="total-impressions" style="font-weight: bold;"></span>
         </div>
         <div>
             <span class="dot" style="background-color: #6941BD;"></span>
