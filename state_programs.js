@@ -46,7 +46,7 @@ let state_programs = ((selector = '#state-programs', data) => {
         // .attr('id','map-group')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
-        let tooltip = d3.select("#state-program-tooltip")
+    let tooltip = d3.select("#state-program-tooltip")
 
     ////////////////////////////////////
     //////////// Scales ////////////
@@ -98,6 +98,7 @@ let state_programs = ((selector = '#state-programs', data) => {
         var state_group = svg.append('g')
             .attr('class', 'state-group')
             .attr('id', d.State)
+            .attr("pointer-events", "bounding-box")
             .attr('transform', `translate(${colScale(col)},${groupSpaceY(row)})`)
 
 
@@ -152,16 +153,18 @@ let state_programs = ((selector = '#state-programs', data) => {
                 .attr('r', (i == radio_dots - 1) ? circleScale(radio_remain) : ((i == radio_dots + streaming_dots - 1) ? circleScale(streaming_remain) : ((i == radio_dots + streaming_dots + reminder_dots - 1) ? circleScale(reminder_remain) : ((i == radio_dots + streaming_dots + reminder_dots + peer_dots - 1) ? circleScale(peer_remain) : (circleScale(250000))))))
                 .attr('cx', start_x + (radius + space) * col)
                 .attr('cy', start_y + (radius + space) * row)
-                .attr('fill', (i < radio_dots) ? colorScale("Radio") : ((i < radio_dots + streaming_dots) ? colorScale("Streaming") : ((i < radio_dots + streaming_dots + reminder_dots) ? colorScale("Reminders") : colorScale("Peer"))))
+                .attr('fill', (i < radio_dots) ? colorScale("Radio") : ((i < radio_dots + streaming_dots) ? colorScale("Streaming") : ((i < radio_dots + streaming_dots + reminder_dots) ? colorScale("Reminders") : colorScale("Peer"))));
+
+            state_group
                 .on("mouseover", function (event) {
-                    
+
                     handle_tooltip(d)
 
                     tooltip.transition()
                         .duration(200)
                         .style("opacity", 1)
-                        .style("left", (event.pageX) + "px")
-                        .style("top", (event.pageY - 28) + "px");
+                        .style("left", (event.pageX + 20) + "px")
+                        .style("top", (event.pageY + 20) + "px");
                 })
                 .on("mouseout", function (d) {
                     tooltip.transition()
