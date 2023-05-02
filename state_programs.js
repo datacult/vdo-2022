@@ -128,7 +128,7 @@ let state_programs = ((selector = '#state-programs', data) => {
             .attr('class', 'state-group')
             .attr('id', d.State)
             .attr("pointer-events", "bounding-box")
-            .attr('transform', isMobile ? `translate(${j*(group_width+50)},${groupSpaceY(row)}) scale(3)`: `translate(${colScale(col)},${groupSpaceY(row)})`)
+            .attr('transform', isMobile ? `translate(${j*(group_width+50)},${groupSpaceY(row)}) scale(1.25)`: `translate(${colScale(col)},${groupSpaceY(row)})`)
 
 
         state_group.append('image')
