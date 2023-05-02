@@ -6,7 +6,7 @@
 
 let state_programs = ((selector = '#state-programs', data) => {
 
-    var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? true : false
+    var isMobile = /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ? true : false
 
     ////////////////////////////////////
     //////////// svg setup /////////////
@@ -29,8 +29,8 @@ let state_programs = ((selector = '#state-programs', data) => {
     }
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
-    const svgWidth = isMobile ? screen.width * 1.5 : 1000
-    const svgHeight = isMobile ? screen.height * 1.2 : 900
+    const svgWidth = isMobile ? 9400 : 1000
+    const svgHeight = isMobile ? screen.height * .8 : 900
 
     // helper calculated variables for inner width & height
     const height = svgHeight - margin.top - margin.bottom
@@ -39,18 +39,41 @@ let state_programs = ((selector = '#state-programs', data) => {
     // add SVG
     d3.select(`${selector} svg`).remove();
 
+    if (isMobile){
+
     d3.select(selector)
     .style('display','flex')
     .style('flex-direction','column')
-    .style('align-items','center')
+    .style('align-items','left')
     .style('justify-content','center')
 
-    const svg = d3.select(selector)
+    } else {
+        d3.select(selector)
+        .style('display','flex')
+        .style('flex-direction','column')
+        .style('align-items','center')
+        .style('justify-content','center')
+    }
+
+    if(isMobile) {
+        var svg = d3.select(selector)
+        .append('svg')
+        // .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
+        .attr('width',svgWidth)
+        .attr('height',svgHeight)
+        .append('g')
+        // .attr('id','map-group')
+        .attr("transform", "translate(" + 0 + "," + 0 + ")")
+    } else {
+        var svg = d3.select(selector)
         .append('svg')
         .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
         .append('g')
         // .attr('id','map-group')
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+    }
+
+    
 
     let tooltip = d3.select("#state-program-tooltip")
 
@@ -90,8 +113,8 @@ let state_programs = ((selector = '#state-programs', data) => {
 
     data.forEach((d, j) => {
 
-        var group_width = 250,
-            per_row = 3
+        var group_width = 800,
+            per_row = isMobile ? 11 : 3
 
         var row = Math.ceil((j + 1) / per_row) - 1, col = (j) % per_row
 
@@ -105,7 +128,7 @@ let state_programs = ((selector = '#state-programs', data) => {
             .attr('class', 'state-group')
             .attr('id', d.State)
             .attr("pointer-events", "bounding-box")
-            .attr('transform', `translate(${colScale(col)},${groupSpaceY(row)})`)
+            .attr('transform', isMobile ? `translate(${j*(group_width+50)},${groupSpaceY(row)}) scale(3)`: `translate(${colScale(col)},${groupSpaceY(row)})`)
 
 
         state_group.append('image')
@@ -148,8 +171,8 @@ let state_programs = ((selector = '#state-programs', data) => {
 
             var row = Math.ceil((i + 1) / num_per_row) - 1, col = (i) % num_per_row
 
-            console.log(radio_remain + ' ' + streaming_remain + ' ' + reminder_remain + ' ' + peer_remain)
-            console.log(circleScale(20000))
+            // console.log(radio_remain + ' ' + streaming_remain + ' ' + reminder_remain + ' ' + peer_remain)
+            // console.log(circleScale(20000))
 
             state_group.append('circle')
                 .attr('class', 'impression-circle')
