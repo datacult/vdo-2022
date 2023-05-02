@@ -30,7 +30,7 @@ let warning = ((selector = '#warning') => {
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
     const svgWidth = isMobile ? screen.width*1.5 : 820//window.innerWidth
-    const svgHeight = isMobile ? screen.height*1.2 : 870//window.innerHeight
+    const svgHeight = isMobile ? screen.height*1.2 : 700//window.innerHeight
 
     // helper calculated variables for inner width & height
     const height = svgHeight - margin.top - margin.bottom
@@ -431,8 +431,7 @@ let warning = ((selector = '#warning') => {
         .style('fill',annot_font_fill)
         .style('font-family',font_family)
         .style('font-size',font_size)
-        .style('font-weight',font_bold_weight)
-        .style('opacity',0);
+        .style('font-weight',font_bold_weight);
 
     textGradient2.append('tspan')
         .attr('id','percentage')
@@ -459,8 +458,7 @@ let warning = ((selector = '#warning') => {
         .style('fill',annot_font_fill)
         .style('font-family',font_family)
         .style('font-size',font_size)
-        .style('font-weight',font_bold_weight)
-        .style('opacity',0);
+        .style('font-weight',font_bold_weight);
 
     textGradient3.append('tspan')
         .attr('id','percentage')
@@ -473,6 +471,9 @@ let warning = ((selector = '#warning') => {
         .attr('x',width/2)
         .attr('y',height - 162);
 
+    textGradient.style('opacity',1);
+    textGradient2.style('opacity',0);
+    textGradient3.style('opacity',0);
     //bar update function 
     function update_bar(data, step) {
         stackedData = d3.stack()
@@ -526,11 +527,12 @@ let warning = ((selector = '#warning') => {
 
             textChart2.style('opacity',0)
 
-            textGradient
-            .transition()
-            .duration(1500).style('opacity',1)
-            textGradient2.style('opacity',0)
-            textGradient3.style('opacity',0)
+            d3.selectAll('#textGradient')
+                .transition().duration(1500).style('opacity',1)
+            d3.selectAll('#textGradient2')
+                .style('opacity',0)
+            d3.selectAll('#textGradient3')
+                .style('opacity',0)
 
             textStates.style('opacity',0)
 
@@ -587,15 +589,18 @@ let warning = ((selector = '#warning') => {
             // d3.select('#annotationline2')
             //     .text('site to register to vote');
 
-            textChart2
-            .transition()
-            .duration(700).style('opacity',0)
+            textChart2.transition().duration(700).style('opacity',0)
 
-            textGradient.style('opacity',0)
-            textGradient2
-            .transition()
-            .duration(1500).style('opacity',1)
-            textGradient3.style('opacity',0)
+            // textGradient.style('opacity',0)
+            // textGradient2.transition().duration(1500).style('opacity',1)
+            // textGradient3.style('opacity',0)
+
+            d3.selectAll('#textGradient2')
+                .transition().duration(1500).style('opacity',1)
+            d3.selectAll('#textGradient')
+                .style('opacity',0)
+            d3.selectAll('#textGradient3')
+                .style('opacity',0)
 
             textStates
             .transition()
@@ -645,19 +650,20 @@ let warning = ((selector = '#warning') => {
             .domain([0, 35000])
             .range([height, 0]);
 
-            textChart2
-            .transition()
-            .duration(1500).style('opacity',1)
+            textChart2.transition().duration(1500).style('opacity',1)
 
-            textGradient.style('opacity',0)
-            textGradient2.style('opacity',0)
-            textGradient3
-            .transition()
-            .duration(1500).style('opacity',1)
+            // textGradient.style('opacity',0)
+            // textGradient2.style('opacity',0)
+            // textGradient3.transition().duration(1500).style('opacity',1)
 
-            textStates
-            .transition()
-            .duration(1500).style('opacity',1)
+            d3.selectAll('#textGradient3')
+                .transition().duration(1500).style('opacity',1)
+            d3.selectAll('#textGradient2')
+                .style('opacity',0)
+            d3.selectAll('#textGradient')
+                .style('opacity',0)
+
+            textStates.transition().duration(1500).style('opacity',1)
 
             d3.select('#kansas')
                 .attr('y',y(17341/2));
