@@ -113,7 +113,7 @@ let state_programs = ((selector = '#state-programs', data) => {
 
     data.forEach((d, j) => {
 
-        var group_width = 800,
+        var group_width = isMobile ? 800 : 250,
             per_row = isMobile ? 11 : 3
 
         var row = Math.ceil((j + 1) / per_row) - 1, col = (j) % per_row
