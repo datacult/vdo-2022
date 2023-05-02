@@ -37,18 +37,18 @@ let state_programs = ((selector = '#state-programs', data) => {
     const width = svgWidth - margin.left - margin.right
 
     // add SVG
-    d3.select(`${selector} svg`).remove();
+    d3.selectAll(`${selector} svg`).remove();
 
     if (isMobile){
 
-    d3.select(selector)
+    d3.selectAll(selector)
     .style('display','flex')
     .style('flex-direction','column')
     .style('align-items','left')
     .style('justify-content','center')
 
     } else {
-        d3.select(selector)
+        d3.selectAll(selector)
         .style('display','flex')
         .style('flex-direction','column')
         .style('align-items','center')
@@ -56,7 +56,7 @@ let state_programs = ((selector = '#state-programs', data) => {
     }
 
     if(isMobile) {
-        var svg = d3.select(selector)
+        var svg = d3.selectAll(selector)
         .append('svg')
         // .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
         .attr('width',svgWidth)
@@ -65,7 +65,7 @@ let state_programs = ((selector = '#state-programs', data) => {
         // .attr('id','map-group')
         .attr("transform", "translate(" + 0 + "," + 0 + ")")
     } else {
-        var svg = d3.select(selector)
+        var svg = d3.selectAll(selector)
         .append('svg')
         .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
         .append('g')
