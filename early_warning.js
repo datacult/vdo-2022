@@ -37,15 +37,15 @@ let warning = ((selector = '#warning') => {
     const width = svgWidth - margin.left - margin.right
 
     // add SVG
-    d3.select(`${selector} svg`).remove();
+    d3.selectAll(`${selector} svg`).remove();
 
-    d3.select(selector)
+    d3.selectAll(selector)
     .style('display','flex')
     .style('flex-direction','column')
     .style('align-items','center')
     .style('justify-content','center')
 
-    const svg = d3.select(selector)
+    const svg = d3.selectAll(selector)
         .append('svg')
         .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
         .append('g')
@@ -487,7 +487,7 @@ let warning = ((selector = '#warning') => {
                 (data)
 
             stackedData.forEach(el => {
-                svg.select('#'+el.key)
+                svg.selectAll('#'+el.key)
                 .selectAll("rect")
                 .data(el)
                 .transition() // <---- Here is the transition
@@ -497,14 +497,14 @@ let warning = ((selector = '#warning') => {
                 .attr("height", d => height - y(d[1])) 
 
                 if (step == 3) {
-                    svg.select('#gradient'+el.key)
+                    svg.selectAll('#gradient'+el.key)
                     .transition() // <---- Here is the transition
                     .duration(1500) // 1.5 seconds
                     .attr('fill','url(#poly-grad)')
                     .attr('d',`M${rectX + rectWidth - 10},${height},H${rectX + rectWidth + rectSpacing + 10},V${y(el[1][1])},L${rectX + rectWidth - 5},${y(el[0][1]) + 5},Z`)
     
                 } else {
-                    svg.select('#gradient'+el.key)
+                    svg.selectAll('#gradient'+el.key)
                     .attr('fill',(el.key == 's1') ? 'url(#poly-grad)' : '#F7F8FF00')
                     .transition() // <---- Here is the transition
                     .duration(1500) // 1.5 seconds
@@ -553,7 +553,7 @@ let warning = ((selector = '#warning') => {
             //     .attr('y',y(141448))
             //     .attr('height',height-y(141448));
             
-            d3.select('#bar1text')
+            d3.selectAll('#bar1text')
                 .transition()
                 .duration(1500)
                 .text('141,448')
@@ -572,7 +572,7 @@ let warning = ((selector = '#warning') => {
 
             update_bar(data,step)
             
-            d3.select('#bar2text')
+            d3.selectAll('#bar2text')
                 .transition()
                 .duration(1500)
                 .text('644,154')
@@ -623,7 +623,7 @@ let warning = ((selector = '#warning') => {
             //     .attr('y',y(8583))
             //     .attr('height',height-y(8583));
             
-            d3.select('#bar1text')
+            d3.selectAll('#bar1text')
                 .transition()
                 .duration(1500)
                 .text('8,583')
@@ -642,7 +642,7 @@ let warning = ((selector = '#warning') => {
 
             update_bar(data,step)
             
-            d3.select('#bar2text')
+            d3.selectAll('#bar2text')
                 .transition()
                 .duration(1500)
                 .text('37,171')
@@ -671,22 +671,22 @@ let warning = ((selector = '#warning') => {
 
             textStates.transition().duration(1500).style('opacity',1)
 
-            d3.select('#kansas')
+            d3.selectAll('#kansas')
                 .attr('y',y(17341/2));
 
-            d3.select('#michigan')
+            d3.selectAll('#michigan')
                 .attr('y',y(17341+(7083/2)));
 
-            d3.select('#california')
+            d3.selectAll('#california')
                 .attr('y',y(17341+7083+(2917/2)));
 
-            d3.select('#kentucky')
+            d3.selectAll('#kentucky')
                 .attr('y',y(17341+7083+2917+(1010/2)));
 
-            d3.select('#montana')
+            d3.selectAll('#montana')
                 .attr('y',y(17341+7083+2917+1010+(269/2)));
 
-            d3.select('#vermont')
+            d3.selectAll('#vermont')
                 .attr('y',y(17341+7083+2917+1010+269+(161/2)));
 
             // d3.select('#gradient')
@@ -700,7 +700,7 @@ let warning = ((selector = '#warning') => {
             //     .attr('y',y(8583))
             //     .attr('height',height-y(8583));
             
-            d3.select('#bar1text')
+            d3.selectAll('#bar1text')
                 .transition()
                 .duration(1500)
                 .text('4,324')
@@ -720,7 +720,7 @@ let warning = ((selector = '#warning') => {
 
             update_bar(data,step)
             
-            d3.select('#bar2text')
+            d3.selectAll('#bar2text')
                 .transition()
                 .duration(1500)
                 .text('28,771')
