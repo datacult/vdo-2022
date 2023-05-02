@@ -37,15 +37,15 @@ let protect = ((selector = '#protecting-democracy') => {
     const width = svgWidth - margin.left - margin.right
 
     // add SVG
-    d3.select(`${selector} svg`).remove();
+    d3.selectAll(`${selector} svg`).remove();
 
-    d3.select(selector)
+    d3.selectAll(selector)
     .style('display','flex')
     .style('flex-direction','column')
     .style('align-items','center')
     .style('justify-content','center')
 
-    const svg = d3.select(selector)
+    const svg = d3.selectAll(selector)
         .append('svg')
         .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
         .append('g')
