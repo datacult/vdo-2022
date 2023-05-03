@@ -39,21 +39,21 @@ let state_programs = ((selector = '#state-programs', data) => {
     // add SVG
     d3.selectAll(`${selector} svg`).remove();
 
-    if (isMobile){
+    // if (isMobile){
 
-    d3.selectAll(selector)
-    .style('display','flex')
-    .style('flex-direction','column')
-    .style('align-items','left')
-    .style('justify-content','center')
+    // d3.selectAll(selector)
+    // .style('display','flex')
+    // .style('flex-direction','column')
+    // .style('align-items','left')
+    // .style('justify-content','center')
 
-    } else {
-        d3.selectAll(selector)
-        .style('display','flex')
-        .style('flex-direction','column')
-        .style('align-items','center')
-        .style('justify-content','center')
-    }
+    // } else {
+    //     d3.selectAll(selector)
+    //     .style('display','flex')
+    //     .style('flex-direction','column')
+    //     .style('align-items','center')
+    //     .style('justify-content','center')
+    // }
 
     if(isMobile) {
         var svg = d3.selectAll(selector)
