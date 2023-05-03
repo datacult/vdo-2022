@@ -106,6 +106,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
         .style('font-weight', '700')
+        .style('font-size', '0.6em')
         .style('font-family',font_family)
         .attr("opacity", 0)
         .text(d => d.value + "%")
@@ -116,6 +117,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
         .attr("fill", "white")
+        .style('font-size', '0.6em')
         .style('font-family',font_family)
         .text("Avg. youth share")
         .attr('opacity',isMobile? 0:1);
@@ -126,6 +128,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
         .attr("fill", "white")
+        .style('font-size', '0.6em')
         .style('font-family',font_family)
         .text("of the vote")
         .attr('opacity',isMobile? 0:1);
@@ -136,6 +139,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "bottom")
         .attr("text-anchor", "start")
         .attr("fill", "white")
+        .style('font-size', '0.6em')
         .style('font-family',font_family)
         .text("Avg. youth share of the vote")
         .attr('opacity',isMobile? 1:0);
@@ -146,6 +150,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
         .attr("fill", "white")
+        .style('font-size', '0.6em')
         .style('font-family',font_family)
         .text("Avg. margins")
         .attr('opacity',isMobile? 0:1);
@@ -156,6 +161,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
         .attr("fill", "white")
+        .style('font-size', '0.6em')
         .style('font-family',font_family)
         .text("of victory")
         .attr('opacity',isMobile? 0:1);
@@ -166,6 +172,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "bottom")
         .attr("text-anchor", "start")
         .attr("fill", "white")
+        .style('font-size', '0.6em')
         .style('font-family',font_family)
         .text("Avg. margins of victory")
         .attr('opacity',isMobile? 1:0);

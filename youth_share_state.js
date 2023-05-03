@@ -174,7 +174,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .attr("alignment-baseline", "middle")
             .attr("text-anchor", d => d.category == "A" ? "end" : "start")
             .attr("fill", d => d.category == "A" ? "#000000" : "#D6D6F2")
-            .style('font-size', '0.75em')
+            .style('font-size', '0.6em')
             .style('font-weight', '500')
             .style('font-family', 'Barlow')
             .attr("opacity", 0)
