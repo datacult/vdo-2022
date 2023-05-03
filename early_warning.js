@@ -17,8 +17,8 @@ let warning = ((selector = '#warning') => {
 
     // margins for SVG
     const margin = isMobile ? {
-        left: 75,
-        right: 50,
+        left: -30,
+        right: -10,
         top: 50,
         bottom: 100
     } : {
@@ -29,7 +29,7 @@ let warning = ((selector = '#warning') => {
     }
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
-    const svgWidth = isMobile ? screen.width*1.5 : 820//window.innerWidth
+    const svgWidth = isMobile ? screen.width*1 : 820//window.innerWidth
     const svgHeight = isMobile ? screen.height*1.2 : 750//window.innerHeight
 
     // helper calculated variables for inner width & height
@@ -140,7 +140,7 @@ let warning = ((selector = '#warning') => {
     ////////////////////////////////////
     
     // const rectHeight1 = 141.1;
-    const rectWidth = 80;
+    const rectWidth = isMobile ? 100 : 80;
     const rectHeight1 = y(141448);
     // const rectHeight2 = 644.1;
     const rectHeight2 = y(644154);
@@ -182,7 +182,7 @@ let warning = ((selector = '#warning') => {
             .join("path")
             .attr('id',d => 'gradient'+d.key)
             // .attr('d',d => `M${x("before") - 10},${height},H${x("after") + 10},V${y(d[1][1])},L${x("before") - 5},${y(d[0][1]) + 5},Z`)
-            .attr('d',d => `M${x("before") + rectWidth - 10},${height},H${x("after") + 10},V${y(d[1][1])},L${x("before") - 5},${y(d[0][1]) + 5},Z`)
+            .attr('d',d => `M${x("before") + rectWidth - 10},${height},H${x("after") + 10},V${y(d[1][1])},L${x("before") + rectWidth - 5},${y(d[0][1]) + 5},Z`)
             .attr('fill',d => (d.key == 's1') ? 'url(#poly-grad)' : '#F7F8FF00')
 
     
@@ -320,8 +320,9 @@ let warning = ((selector = '#warning') => {
         .style('font-size',font_size)
         .style('font-weight',font_reg_weight);
 
+    var mobile_center_shift = 10
     svg.append('rect')
-        .attr('x',width/2-77/2)
+        .attr('x',isMobile ? width/2 + mobile_center_shift-77/2: width/2-77/2)
         .attr('y',height - 200)
         .attr('rx',17)
         .attr('ry',17)
@@ -332,7 +333,7 @@ let warning = ((selector = '#warning') => {
     var textChart = svg.append('text')
         .attr('id','textChart')
         .style('text-anchor','left')
-        .attr('y',rectHeight2)
+        .attr('y',isMobile ? -margin.top+20 : rectHeight2)
         .style('fill',annot_font_fill)
         .style('font-family',font_family)
         .style('font-size',font_size)
@@ -356,7 +357,7 @@ let warning = ((selector = '#warning') => {
     var textChart2 = svg.append('text')
         .attr('id','textChart2')
         .style('text-anchor','left')
-        .attr('y',rectHeight2)
+        .attr('y',isMobile ? -margin.top+20 : rectHeight2)
         .style('fill',annot_font_fill)
         .style('font-family',font_family)
         .style('font-size',font_size)
@@ -365,7 +366,7 @@ let warning = ((selector = '#warning') => {
 
     textChart2.append('tspan')
         .text('Six states with abortion measures on the ballot saw')
-        .attr('y',rectHeight2 + 100)
+        .attr('y',isMobile ? -margin.top+120 :rectHeight2 + 100)
         .attr('dy',line_height)
         .attr('x',rectX);
 
@@ -376,13 +377,17 @@ let warning = ((selector = '#warning') => {
 
     textChart2.append('tspan')
         .text('We saw a nearly 1000% increase')
-        .attr('y',rectHeight2 + 190)
+        .attr('y',isMobile ? -margin.top+210 :rectHeight2 + 190)
         .attr('x',rectX);
 
     textChart2.append('tspan')
         .text('in registrations in Kansas alone.')
         .attr('dy',line_height)
         .attr('x',rectX);
+
+    if (!(isMobile)) {
+
+    
 
     var textStates = svg.append('text')
         .attr('id','textStates')
@@ -439,9 +444,11 @@ let warning = ((selector = '#warning') => {
         .attr('stroke',annot_font_fill)
         .attr('stroke-width','1px')
 
+    }
+
     var textGradient = svg.append('text')
         .attr('id','textGradient')
-        .attr('x',width/2)
+        .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
         .attr('y',height - 177)
         .style('text-anchor','middle')
         .style('fill',annot_font_fill)
@@ -457,18 +464,18 @@ let warning = ((selector = '#warning') => {
         .attr('id','annotationline1')
         .text('increase in total')
         .attr('dy',line_height)
-        .attr('x',width/2)
+        .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
         .attr('y',height - 162);
 
     textGradient.append('tspan')
         .attr('id','annotationline2')
         .text('Vote.org visits')
         .attr('dy',line_height)
-        .attr('x',width/2);
+        .attr('x',isMobile ? width/2 + mobile_center_shift: width/2);
 
     var textGradient2 = svg.append('text')
         .attr('id','textGradient2')
-        .attr('x',width/2)
+        .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
         .attr('y',height - 177)
         .style('text-anchor','middle')
         .style('fill',annot_font_fill)
@@ -482,20 +489,27 @@ let warning = ((selector = '#warning') => {
 
     textGradient2.append('tspan')
         .attr('id','annotationline1')
-        .text('increase in individuals visiting the')
+        .text(isMobile ? 'increase in individuals': 'increase in individuals visiting the')
         .attr('dy',line_height)
-        .attr('x',width/2)
+        .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
         .attr('y',height - 162);
 
     textGradient2.append('tspan')
         .attr('id','annotationline2')
-        .text('site to register to vote')
+        .text(isMobile ? 'visiting the site to': 'site to register to vote')
         .attr('dy',line_height)
-        .attr('x',width/2);
+        .attr('x',isMobile ? width/2 + mobile_center_shift: width/2);
+
+        textGradient2.append('tspan')
+            .attr('id','annotationline2')
+            .text('register to vote')
+            .attr('dy',line_height)
+            .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
+            .style('opacity',isMobile ? 1 : 0);
 
     var textGradient3 = svg.append('text')
         .attr('id','textGradient3')
-        .attr('x',width/2)
+        .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
         .attr('y',height - 177)
         .style('text-anchor','middle')
         .style('fill',annot_font_fill)
@@ -509,10 +523,17 @@ let warning = ((selector = '#warning') => {
 
     textGradient3.append('tspan')
         .attr('id','annotationline1')
-        .text('increase in Vote.org tool users')
+        .text(isMobile ? 'increase in' : 'increase in Vote.org tool users')
         .attr('dy',line_height)
-        .attr('x',width/2)
+        .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
         .attr('y',height - 162);
+
+    textGradient3.append('tspan')
+        .attr('id','annotationline2')
+        .text('Vote.org tool users')
+        .attr('dy',line_height)
+        .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
+        .style('opacity',isMobile ? 1 : 0);
 
     textGradient.attr('opacity',1);
     textGradient2.attr('opacity',0);
@@ -537,14 +558,14 @@ let warning = ((selector = '#warning') => {
                     .transition() // <---- Here is the transition
                     .duration(1500) // 1.5 seconds
                     .attr('fill','url(#poly-grad)')
-                    .attr('d',`M${x("before") - 10},${height},H${x("after") + 10},V${y(el[1][1])},L${x("before") - 5},${y(el[0][1]) + 5},Z`)
+                    .attr('d',`M${x("before") - 10},${height},H${x("after") + 10},V${y(el[1][1])},L${x("before")+ rectWidth - 5},${y(el[0][1]) + 5},Z`)
     
                 } else {
                     svg.selectAll('#gradient'+el.key)
                     .attr('fill',(el.key == 's1') ? 'url(#poly-grad)' : '#F7F8FF00')
                     .transition() // <---- Here is the transition
                     .duration(1500) // 1.5 seconds
-                    .attr('d',`M${x("before") - 10},${height},H${x("after") + 10},V${y(el[1][1])},L${x("before") - 5},${y(el[0][1]) + 5},Z`)
+                    .attr('d',`M${x("before") - 10},${height},H${x("after") + 10},V${y(el[1][1])},L${x("before")+ rectWidth - 5},${y(el[0][1]) + 5},Z`)
     
                 }
                 
@@ -568,8 +589,16 @@ let warning = ((selector = '#warning') => {
             d3.selectAll('#textGradient3')
             .transition().duration(0).attr('opacity',0)
 
+            if (!(isMobile)) {
             textStates.style('opacity',0)
-            
+
+            d3.selectAll('#states-line')
+                .transition().duration(700)
+                .attr('x1',x("after")+88)
+                .attr('y1',height*.2)
+                .attr('x2',x("after")+88)
+                .attr('y2',height*.2)
+            }
             d3.selectAll('#bar1text')
                 .transition()
                 .duration(1500)
@@ -591,12 +620,6 @@ let warning = ((selector = '#warning') => {
                 .style('fill',bar_font_fill)
                 .attr('y',y(644154) + 30);
 
-                d3.selectAll('#states-line')
-                .transition().duration(1500)
-                .attr('x1',x("after")+88)
-                .attr('y1',height*.2)
-                .attr('x2',x("after")+88)
-                .attr('y2',height*.2)
 
 
         } else if(step==2) {
@@ -613,16 +636,20 @@ let warning = ((selector = '#warning') => {
             d3.selectAll('#textGradient3')
             .transition().duration(0).attr('opacity',0)
 
-            textStates
-            .transition()
-            .duration(700).style('opacity',0)
+            
 
-            d3.selectAll('#states-line')
-                .transition().duration(1500)
-                .attr('x1',x("after")+88)
-                .attr('y1',height*.2)
-                .attr('x2',x("after")+88)
-                .attr('y2',height*.2)
+            if (!(isMobile)) {
+                textStates
+                    .transition()
+                    .duration(700).style('opacity',0)
+
+                d3.selectAll('#states-line')
+                    .transition().duration(700)
+                    .attr('x1',x("after")+88)
+                    .attr('y1',height*.2)
+                    .attr('x2',x("after")+88)
+                    .attr('y2',height*.2)
+                }
             
             d3.selectAll('#bar1text')
                 .transition()
@@ -660,6 +687,7 @@ let warning = ((selector = '#warning') => {
             d3.selectAll('#textGradient')
             .transition().duration(0).attr('opacity',0)
 
+            if (!(isMobile)) {
             textStates.transition().duration(1500).style('opacity',1)
 
             d3.selectAll('#kansas')
@@ -688,6 +716,7 @@ let warning = ((selector = '#warning') => {
                 .transition().duration(1500)
                 .attr('x2',x("after")+105)
                 .attr('y2',y(17341+7083+2917+1010+(269/2+400)))
+            }
             
             d3.selectAll('#bar1text')
                 .transition()
