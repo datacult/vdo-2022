@@ -29,8 +29,8 @@ let state_programs = ((selector = '#state-programs', data) => {
     }
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
-    const svgWidth = isMobile ? 9400 : 1000
-    const svgHeight = isMobile ? screen.height * .8 : 900
+    const svgWidth = isMobile ? 3900 : 1000
+    const svgHeight = isMobile ? 300 : 900
 
     // helper calculated variables for inner width & height
     const height = svgHeight - margin.top - margin.bottom
@@ -113,7 +113,7 @@ let state_programs = ((selector = '#state-programs', data) => {
 
     data.forEach((d, j) => {
 
-        var group_width = isMobile ? 800 : 250,
+        var group_width = isMobile ? 350 : 250,
             per_row = isMobile ? 11 : 3
 
         var row = Math.ceil((j + 1) / per_row) - 1, col = (j) % per_row
@@ -128,7 +128,7 @@ let state_programs = ((selector = '#state-programs', data) => {
             .attr('class', 'state-group')
             .attr('id', d.State)
             .attr("pointer-events", "bounding-box")
-            .attr('transform', isMobile ? `translate(${j*(group_width+10)},${groupSpaceY(row)}) scale(1.25)`: `translate(${colScale(col)},${groupSpaceY(row)})`)
+            .attr('transform', isMobile ? `translate(${j*(group_width)},${groupSpaceY(row)}) scale(1.25)`: `translate(${colScale(col)},${groupSpaceY(row)})`)
 
 
         state_group.append('image')
