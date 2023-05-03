@@ -28,7 +28,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         bottom: 50
     } : {
         left: 200,
-        right: 200,
+        right: 100,
         top: 50,
         bottom: 50
     }
