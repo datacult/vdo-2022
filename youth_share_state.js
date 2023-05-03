@@ -38,20 +38,20 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
 
     // margins for SVG
     const margin = isMobile ? {
-        left: 75,
+        left: 60,
         right: 50,
         top: 50,
         bottom: 50
     } : {
-        left: 50,
+        left: 100,
         right: 50,
         top: 50,
         bottom: 50
     }
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
-    const svgWidth = isMobile ? screen.width * 1.5 : 1000
-    const svgHeight = isMobile ? screen.height * 1.2 : 200
+    const svgWidth = isMobile ? screen.width * 1 : 1000
+    const svgHeight = isMobile ? screen.height * .9 : 200
 
     // helper calculated variables for inner width & height
     const height = svgHeight - margin.top - margin.bottom
@@ -99,14 +99,14 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
         var left_margin = 50
 
         var group_width = 250,
-            per_row = 3,
+            per_row = isMobile ? 1 : 3,
             bar_transpose = 60
 
-        var row = Math.ceil((j + 1) / per_row) - 1, col = (j) % per_row
+        var row = Math.ceil((j + 1) / per_row) - 1, col = (j) % per_row, bar_width = 50
 
         // Define the bar chart scales
         let x = d3.scaleLinear().range([0, group_width - left_margin - 40]);
-        let y = d3.scaleBand().range([0, height / (per_row*0.6)]).paddingInner(0.3).paddingOuter(0.1);
+        let y = d3.scaleBand().range([0, isMobile ? bar_width : height / (per_row*0.5)]).paddingInner(0.3).paddingOuter(0.1);
 
         // Set the scale domains based on the data
         x.domain([0, 13]);
@@ -120,7 +120,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
         var state_group = svg.append('g')
             .attr('class', 'state-group')
             .attr('id', d.State)
-            .attr('transform', `translate(${colScale(col)},${groupSpaceY(row)})`)
+            .attr('transform', isMobile ? `translate(${colScale(col)},${isMobile ? j*200: groupSpaceY(row)}) scale(1.2)`: `translate(${colScale(col)},${isMobile ? j*180: groupSpaceY(row)})`)
 
 
         state_group.append('image')
@@ -142,13 +142,13 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .attr('transform', 'translate(' + left_margin + ',40)')
             .text(d.difference + '%')
             .style('font-family', 'Barlow')
-            .style('font-size', '11px')
+            .style('font-size', '12px')
             .style('fill', '#ffffff')
 
         imp_text.append('tspan')
             .text(' difference')
             .style('font-family', 'Barlow')
-            .style('font-size', '11px')
+            .style('font-size', '12px')
             .style('fill', '#ffffff')
 
         let bars = state_group
@@ -174,24 +174,48 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .attr("alignment-baseline", "middle")
             .attr("text-anchor", d => d.category == "A" ? "end" : "start")
             .attr("fill", d => d.category == "A" ? "#000000" : "#D6D6F2")
-            .style('font-size', '0.5em')
+            .style('font-size', '0.75em')
             .style('font-weight', '500')
+            .style('font-family', 'Barlow')
             .attr("opacity", 0)
             .text(d => d.value + "%")
 
 
-        bars
-            .transition()
-            .delay(function (d, i) { return transition_time * i; })
-            .duration(transition_time)
-            .attr("width", (d) => x(d.value))
-            .attr("d", (d) => rightRoundedRect(left_margin, y(d.category) + bar_transpose, x(d.value), y.bandwidth(), 3));
+        
 
-        bar_text
-            .transition()
-            .delay(function (d, i) { return (transition_time * i) + (transition_time / 2) + 200; })
-            .duration(transition_time / 2)
-            .attr("opacity", 1)
+        /// scroll observer for initial load
+    let options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: [.5]
+      };
+
+        const shareST = document.querySelector(selector);
+
+        const shareSTObserver = new IntersectionObserver(handleShareST, options);
+    
+        function handleShareST(entry, observer) {
+            if (entry[0].intersectionRatio > .5) {
+                update()
+            }
+        };
+    
+        shareSTObserver.observe(shareST);
+
+   function update() {
+    bars
+    .transition()
+    .delay(function (d, i) { return transition_time * i; })
+    .duration(transition_time)
+    .attr("width", (d) => x(d.value))
+    .attr("d", (d) => rightRoundedRect(left_margin, y(d.category) + bar_transpose, x(d.value), y.bandwidth(), 3));
+
+bar_text
+    .transition()
+    .delay(function (d, i) { return (transition_time * i) + (transition_time / 2) + 200; })
+    .duration(transition_time / 2)
+    .attr("opacity", 1)
+    }
 
         ////////////////////////////////////
         //////////// axis //////////////////
@@ -202,7 +226,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .attr("x1", left_margin)
             .attr("x2", left_margin)
             .attr("y1", bar_transpose)
-            .attr("y2", bar_transpose + (height / (per_row * 0.6)))
+            .attr("y2", bar_transpose + (isMobile ? bar_width : height / (per_row * 0.5)))
             .attr("stroke-width", 0.5)
             .attr("stroke", "white");
 
