@@ -22,8 +22,8 @@ let youth_share = ((selector = '#youth_share', data) => {
 
     // margins for SVG
     const margin = isMobile ? {
-        left: 200,
-        right: 200,
+        left: 50,
+        right: 50,
         top: 50,
         bottom: 50
     } : {
@@ -34,8 +34,8 @@ let youth_share = ((selector = '#youth_share', data) => {
     }
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
-    const svgWidth = isMobile ? screen.width * 1.5 : 1000
-    const svgHeight = isMobile ? screen.height * 1.2 : 250
+    const svgWidth = isMobile ? /*screen.width * 1.5*/500 : 1000
+    const svgHeight = isMobile ? /*screen.width * 1.2*/ 300: 250
 
     // helper calculated variables for inner width & height
     const height = svgHeight - margin.top - margin.bottom
@@ -67,7 +67,7 @@ let youth_share = ((selector = '#youth_share', data) => {
 
     // Define the bar chart scales
     const x = d3.scaleLinear().range([0, width]);
-    const y = d3.scaleBand().range([0, height]).paddingInner(0.3).paddingOuter(0.1);
+    const y = d3.scaleBand().range([0, height]).paddingInner(isMobile? 0.4:0.3).paddingOuter(isMobile? 0.2:0.1);
 
     // Set the scale domains based on the data
     x.domain([0, d3.max(data, (d) => d.value)]);
@@ -93,6 +93,8 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("width", 0)
         .attr("d", (d) => rightRoundedRect(0, y(d.category), 0, y.bandwidth(), 0));
 
+    
+    var font_family = 'Barlow'
 
     let bar_text = svg
         .selectAll(".bar_value")
@@ -104,6 +106,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
         .style('font-weight', '700')
+        .style('font-family',font_family)
         .attr("opacity", 0)
         .text(d => d.value + "%")
 
@@ -113,7 +116,9 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
         .attr("fill", "white")
-        .text("Avg. youth share");
+        .style('font-family',font_family)
+        .text("Avg. youth share")
+        .attr('opacity',isMobile? 0:1);
 
     svg.append("text")
         .attr("x", -15)
@@ -121,7 +126,19 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
         .attr("fill", "white")
-        .text("of the vote");
+        .style('font-family',font_family)
+        .text("of the vote")
+        .attr('opacity',isMobile? 0:1);
+
+    svg.append("text")
+        .attr("x", 10)
+        .attr("y", y("A")  - 10)
+        .attr("alignment-baseline", "bottom")
+        .attr("text-anchor", "start")
+        .attr("fill", "white")
+        .style('font-family',font_family)
+        .text("Avg. youth share of the vote")
+        .attr('opacity',isMobile? 1:0);
 
     svg.append("text")
         .attr("x", -15)
@@ -129,7 +146,9 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
         .attr("fill", "white")
-        .text("Avg. margins");
+        .style('font-family',font_family)
+        .text("Avg. margins")
+        .attr('opacity',isMobile? 0:1);
 
     svg.append("text")
         .attr("x", -15)
@@ -137,13 +156,45 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
         .attr("fill", "white")
-        .text("of victory");
+        .style('font-family',font_family)
+        .text("of victory")
+        .attr('opacity',isMobile? 0:1);
+
+        svg.append("text")
+        .attr("x", 10)
+        .attr("y", y("B")  - 10)
+        .attr("alignment-baseline", "bottom")
+        .attr("text-anchor", "start")
+        .attr("fill", "white")
+        .style('font-family',font_family)
+        .text("Avg. margins of victory")
+        .attr('opacity',isMobile? 1:0);
 
     // update
 
+    /// scroll observer for initial load
+    let options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: [.5]
+      };
+
+        const share = document.querySelector(selector);
+
+        const shareObserver = new IntersectionObserver(handleShare, options);
+    
+        function handleShare(entry, observer) {
+            if (entry[0].intersectionRatio > .5) {
+                update()
+            }
+        };
+    
+        shareObserver.observe(share);
+
     let transition_time = 1000
 
-    bars
+   function update() {
+        bars
         .transition()
         .delay(function (d, i) { return transition_time * i; })
         .duration(transition_time)
@@ -155,6 +206,8 @@ let youth_share = ((selector = '#youth_share', data) => {
         .delay(function (d, i) { return (transition_time * i) + (transition_time / 2) + 200; })
         .duration(transition_time / 2)
         .attr("opacity", 1)
+    }
+   
 
 
     function rightRoundedRect(x, y, width, height, radius) {
