@@ -20,7 +20,7 @@ let warning = ((selector = '#warning') => {
         left: 75,
         right: 50,
         top: 50,
-        bottom: 50
+        bottom: 100
     } : {
         left: 100,
         right: 50,
@@ -181,7 +181,8 @@ let warning = ((selector = '#warning') => {
             .data(stackedData.reverse())
             .join("path")
             .attr('id',d => 'gradient'+d.key)
-            .attr('d',d => `M${rectX + rectWidth - 10},${height},H${rectX + rectWidth + rectSpacing + 10},V${y(d[1][1])},L${rectX + rectWidth - 5},${y(d[0][1]) + 5},Z`)
+            // .attr('d',d => `M${x("before") - 10},${height},H${x("after") + 10},V${y(d[1][1])},L${x("before") - 5},${y(d[0][1]) + 5},Z`)
+            .attr('d',d => `M${x("before") + rectWidth - 10},${height},H${x("after") + 10},V${y(d[1][1])},L${x("before") - 5},${y(d[0][1]) + 5},Z`)
             .attr('fill',d => (d.key == 's1') ? 'url(#poly-grad)' : '#F7F8FF00')
 
     
@@ -209,7 +210,7 @@ let warning = ((selector = '#warning') => {
         .attr('id','bar1')
         .attr('width',rectWidth)
         .attr('height',10)
-        .attr('x',rectX)
+        .attr('x',x("before"))
         .attr('y',height-10)
         .attr('fill',rectColor);
     
@@ -217,7 +218,7 @@ let warning = ((selector = '#warning') => {
     svg.append('text')
         .attr('id','bar1text')
         .text('141,448')
-        .attr('x',rectX + rectWidth / 2)
+        .attr('x',x("before") + rectWidth / 2)
         .attr('y',rectHeight1 + 30)
         .style('text-anchor','middle')
         .style('fill',bar_font_fill)
@@ -227,19 +228,30 @@ let warning = ((selector = '#warning') => {
     
     //Add the first bar's x-axis labels
     svg.append('text')
-        .text('Prior to the SCOTUS decision')
-        .attr('x',rectX + rectWidth / 2)
+        .text(isMobile ? 'Prior to the': 'Prior to the SCOTUS decision')
+        .attr('x',x("before") + rectWidth / 2)
         .attr('y',height + 30)
         .style('text-anchor','middle')
         .style('fill',axis_font_fill)
         .style('font-family',font_family)
         .style('font-size',font_size)
         .style('font-weight',font_bold_weight);
+
+    svg.append('text')
+        .text('SCOTUS decision')
+        .attr('x',x("before") + rectWidth / 2)
+        .attr('y',height + 50)
+        .style('text-anchor','middle')
+        .style('fill',axis_font_fill)
+        .style('font-family',font_family)
+        .style('font-size',font_size)
+        .style('font-weight',font_bold_weight)
+        .style('opacity',isMobile ? 1 :0);
     
     svg.append('text')
         .text('June 10 – June 23')
-        .attr('x',rectX + rectWidth / 2)
-        .attr('y',height + 55)
+        .attr('x',x("before")+ rectWidth / 2)
+        .attr('y',isMobile ? height + 75 : height + 55)
         .style('text-anchor','middle')
         .style('fill',axis_font_fill)
         .style('font-family',font_family)
@@ -251,14 +263,14 @@ let warning = ((selector = '#warning') => {
         .attr('id','bar1')
         .attr('width',rectWidth)
         .attr('height',10)
-        .attr('x',rectX + rectWidth + rectSpacing+2)
+        .attr('x',x("after"))
         .attr('y',height-10)
         .attr('fill',rectColor);
     // svg.append('rect')
     //     .attr('id','bar2')
     //     .attr('width',rectWidth)
     //     .attr('height',height - rectHeight2)
-    //     .attr('x',rectX + rectWidth + rectSpacing)
+    //     .attr('x',x("before") + rectSpacing)
     //     .attr('y',rectHeight2)
     //     .attr('fill',rectColor)
     //     .attr('rx',10)
@@ -268,7 +280,7 @@ let warning = ((selector = '#warning') => {
     svg.append('text')
         .attr('id','bar2text')
         .text('644,154')
-        .attr('x',rectX + rectWidth + rectSpacing + rectWidth / 2)
+        .attr('x',x("after") + rectWidth / 2)
         .attr('y',rectHeight2 + 30)
         .style('text-anchor','middle')
         .style('fill',bar_font_fill)
@@ -278,19 +290,30 @@ let warning = ((selector = '#warning') => {
     
     //Add the second bar's x-axis labels
     svg.append('text')
-        .text('After the SCOTUS decision')
-        .attr('x',rectX + rectWidth + rectSpacing + rectWidth / 2)
+        .text(isMobile ? 'After the': 'After the SCOTUS decision')
+        .attr('x',x("after") + rectWidth / 2)
         .attr('y',height + 30)
         .style('text-anchor','middle')
         .style('fill',axis_font_fill)
         .style('font-family',font_family)
         .style('font-size',font_size)
         .style('font-weight',font_bold_weight);
+
+    svg.append('text')
+        .text('SCOTUS decision')
+        .attr('x',x("after") + rectWidth / 2)
+        .attr('y',height + 50)
+        .style('text-anchor','middle')
+        .style('fill',axis_font_fill)
+        .style('font-family',font_family)
+        .style('font-size',font_size)
+        .style('font-weight',font_bold_weight)
+        .style('opacity',isMobile ? 1 :0);
     
     svg.append('text')
         .text('June 24 – July 7')
-        .attr('x',rectX + rectWidth + rectSpacing + rectWidth  / 2)
-        .attr('y',height + 55)
+        .attr('x',x("after") + rectWidth  / 2)
+        .attr('y',isMobile ? height + 75 : height + 55)
         .style('text-anchor','middle')
         .style('fill',axis_font_fill)
         .style('font-family',font_family)
@@ -364,7 +387,7 @@ let warning = ((selector = '#warning') => {
     var textStates = svg.append('text')
         .attr('id','textStates')
         .style('text-anchor','left')
-        .attr('x',rectX + rectWidth + rectSpacing + 100)
+        .attr('x',x("after") + 100)
         .attr('y',rectHeight2 + 30)
         .style('fill',annot_font_fill)
         .style('font-family',font_family)
@@ -375,43 +398,43 @@ let warning = ((selector = '#warning') => {
     textStates.append('tspan')
         .attr('id','kentucky')
         .text('Kentucky')
-        .attr('x',rectX + rectWidth + rectSpacing + 110);
+        .attr('x',x("after") + 110);
 
     textStates.append('tspan')
         .attr('id','michigan')
         .text('Michigan')
     //     .attr('y',y(24424))
-        .attr('x',rectX + rectWidth + rectSpacing + 110);
+        .attr('x',x("after") + 110);
 
     textStates.append('tspan')
         .attr('id','kansas')
         .text('Kansas')
         // .attr('y',y(27341))
-        .attr('x',rectX + rectWidth + rectSpacing + 110);
+        .attr('x',x("after") + 110);
 
     textStates.append('tspan')
         .attr('id','california')
         .text('California')
         // .attr('y',y(28351))
-        .attr('x',rectX + rectWidth + rectSpacing + 110);
+        .attr('x',x("after") + 110);
 
     textStates.append('tspan')
         .attr('id','montana')
         .text('Montana,')
         // .attr('y',y(28620))
-        .attr('x',rectX + rectWidth + rectSpacing + 110);
+        .attr('x',x("after") + 110);
 
     textStates.append('tspan')
         .attr('id','vermont')
         .text('Vermont,')
         // .attr('y',y(28781))
-        .attr('x',rectX + rectWidth + rectSpacing + 110);
+        .attr('x',x("after") + 110);
 
     svg.append('line')
         .attr('id','states-line')
-        .attr('x1',rectX + rectWidth + rectSpacing+10)
+        .attr('x1',x("after")+10)
         .attr('y1',height*.1)
-        .attr('x2',rectX + rectWidth + rectSpacing+10)
+        .attr('x2',x("after")+10)
         .attr('y2',height*.1)
         .attr('stroke',annot_font_fill)
         .attr('stroke-width','1px')
@@ -514,14 +537,14 @@ let warning = ((selector = '#warning') => {
                     .transition() // <---- Here is the transition
                     .duration(1500) // 1.5 seconds
                     .attr('fill','url(#poly-grad)')
-                    .attr('d',`M${rectX + rectWidth - 10},${height},H${rectX + rectWidth + rectSpacing + 10},V${y(el[1][1])},L${rectX + rectWidth - 5},${y(el[0][1]) + 5},Z`)
+                    .attr('d',`M${x("before") - 10},${height},H${x("after") + 10},V${y(el[1][1])},L${x("before") - 5},${y(el[0][1]) + 5},Z`)
     
                 } else {
                     svg.selectAll('#gradient'+el.key)
                     .attr('fill',(el.key == 's1') ? 'url(#poly-grad)' : '#F7F8FF00')
                     .transition() // <---- Here is the transition
                     .duration(1500) // 1.5 seconds
-                    .attr('d',`M${rectX + rectWidth - 10},${height},H${rectX + rectWidth + rectSpacing + 10},V${y(el[1][1])},L${rectX + rectWidth - 5},${y(el[0][1]) + 5},Z`)
+                    .attr('d',`M${x("before") - 10},${height},H${x("after") + 10},V${y(el[1][1])},L${x("before") - 5},${y(el[0][1]) + 5},Z`)
     
                 }
                 
@@ -570,9 +593,9 @@ let warning = ((selector = '#warning') => {
 
                 d3.selectAll('#states-line')
                 .transition().duration(1500)
-                .attr('x1',rectX + rectWidth + rectSpacing+88)
+                .attr('x1',x("after")+88)
                 .attr('y1',height*.2)
-                .attr('x2',rectX + rectWidth + rectSpacing+88)
+                .attr('x2',x("after")+88)
                 .attr('y2',height*.2)
 
 
@@ -596,9 +619,9 @@ let warning = ((selector = '#warning') => {
 
             d3.selectAll('#states-line')
                 .transition().duration(1500)
-                .attr('x1',rectX + rectWidth + rectSpacing+88)
+                .attr('x1',x("after")+88)
                 .attr('y1',height*.2)
-                .attr('x2',rectX + rectWidth + rectSpacing+88)
+                .attr('x2',x("after")+88)
                 .attr('y2',height*.2)
             
             d3.selectAll('#bar1text')
@@ -658,12 +681,12 @@ let warning = ((selector = '#warning') => {
                 .attr('y',y(17341+7083+2917+1010+269+(161/2+1050)));
 
             d3.selectAll('#states-line')
-                .attr('x1',rectX + rectWidth + rectSpacing+88)
+                .attr('x1',x("after")+88)
                 .attr('y1',y(17341+7083+2917+(1010/2)+400))
-                .attr('x2',rectX + rectWidth + rectSpacing+88)
+                .attr('x2',x("after")+88)
                 .attr('y2',y(17341+7083+2917+(1010/2)+400))
                 .transition().duration(1500)
-                .attr('x2',rectX + rectWidth + rectSpacing+105)
+                .attr('x2',x("after")+105)
                 .attr('y2',y(17341+7083+2917+1010+(269/2+400)))
             
             d3.selectAll('#bar1text')
