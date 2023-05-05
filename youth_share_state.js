@@ -81,7 +81,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
     // Add color scale
     const colorScale = d3.scaleOrdinal()
         .domain(["A", "B"])
-        .range(["#ffffff", "#D6D6F2"]);
+        .range(["#ffffff", "#B1A9E0"]);
 
     var group_space = 50
 

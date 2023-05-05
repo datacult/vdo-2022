@@ -22,14 +22,14 @@ let protect = ((selector = '#protecting-democracy') => {
         top: 50,
         bottom: 50
     } : {
-        left: 50,
+        left: 0,
         right: 50,
         top: 75,
         bottom: 100
     }
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
-    const svgWidth = isMobile ? screen.width*1.5 : 800
+    const svgWidth = isMobile ? screen.width*1.5 : 850
     const svgHeight = isMobile ? screen.height*1.2 : 650
 
     // helper calculated variables for inner width & height
@@ -119,7 +119,7 @@ let protect = ((selector = '#protecting-democracy') => {
     //////////////////////////////////// 
     
     //Build the graph in here!
-    var bills2021 = 440, bills2022 = 250, bills2023 = 150-3, total_bills = bills2021+bills2022+bills2023,
+    var bills2021 = 440, bills2022 = 408/*250*/, bills2023 = 150-3, total_bills = bills2021+bills2022+bills2023,
     stack_height = isMobile ? 125 : 100, start_x = 0, start_y = isMobile ? height-30 : height, wiggle = 3, col_space = isMobile ? 62 : 60
 
     var bill_group = svg.append('g')
@@ -141,7 +141,7 @@ let protect = ((selector = '#protecting-democracy') => {
 
     }
 
-    var col_number = isMobile ? 7 : 9
+    var col_number = isMobile ? 7 : 10
     bill_group.append('path')
         .attr('class','bill')
         .attr('id','b2023')
@@ -175,8 +175,8 @@ let protect = ((selector = '#protecting-democracy') => {
 
     var line_height = isMobile ? '30px' : '20px', font_size = isMobile ? '25px' : '16px', font_family = 'Barlow', font_fill = '#F7F8FF',
     x2021 = isMobile ? 0 : 4*col_space+col_space/2.5, 
-    x2022 = isMobile ? 0 : 7*col_space+col_space/2.5, 
-    x2023 = isMobile ? 0 : 8*col_space+col_space/2.5,
+    x2022 = isMobile ? 0 : 8*col_space+col_space/2.5, 
+    x2023 = isMobile ? 0 : 10*col_space+col_space/2.5,
     texty = isMobile ? height/10 : height/3
     var text2021 = svg.append('text')
     .attr('id','text2021')
@@ -225,7 +225,7 @@ let protect = ((selector = '#protecting-democracy') => {
     .attr('y',texty)
 
     text2022.append('tspan')
-    .text('In 2022, legislators in at least 27')
+    .text('In 2022, legislators in at least 39')
     .attr('font-family',font_family)
     .attr('font-size',font_size)
     .attr('fill',font_fill)
@@ -247,7 +247,7 @@ let protect = ((selector = '#protecting-democracy') => {
     .attr('fill',font_fill)
 
     text2022.append('tspan')
-    .text('250 bills')
+    .text('408 bills')
     .attr('font-family',font_family)
     .attr('font-size',font_size)
     .attr('fill',font_fill)

@@ -63,7 +63,7 @@ let youth_share = ((selector = '#youth_share', data) => {
     // Add color scale
     const colorScale = d3.scaleOrdinal()
         .domain(["A", "B"])
-        .range(["#ffffff", "#D6D6F2"]);
+        .range(["#ffffff", "#B1A9E0"]);
 
     // Define the bar chart scales
     const x = d3.scaleLinear().range([0, width]);
