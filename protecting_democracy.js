@@ -322,7 +322,7 @@ let protect = ((selector = '#protecting-democracy') => {
         svg.append('text')
             .attr('class','legend'+el)
             .attr('x',isMobile ? start_x+legend_r*3 + i*100 : legend_x)
-            .attr('y',isMobile ? height+42-legend_r/2 : height-i*30)
+            .attr('y',isMobile ? height+42-legend_r/2 : height-i*35)
             .text(el)
             .attr('font-family',font_family)
             .attr('font-size',isMobile ? '20px' : font_size)
