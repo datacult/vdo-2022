@@ -345,12 +345,12 @@ let warning = ((selector = '#warning') => {
         .attr('x',rectX);
 
     textChart.append('tspan')
-        .text('decision concerning Dobbs vs. Jackson Womens Health')
+        .text(`decision concerning Dobbs vs. Jackson Women's Health`)
         .attr('dy',line_height)
         .attr('x',rectX);
 
     textChart.append('tspan')
-        .text('Organization on June 24, 2022')
+        .text('Organization on June 24, 2022.')
         .attr('dy',line_height)
         .attr('x',rectX);
 
