@@ -17,8 +17,8 @@ let warning = ((selector = '#warning') => {
 
     // margins for SVG
     const margin = isMobile ? {
-        left: 5,
-        right: 25,
+        left: 20,
+        right: 40,
         top: 50,
         bottom: 100
     } : {
@@ -146,15 +146,15 @@ let warning = ((selector = '#warning') => {
     const rectHeight2 = y(644154);
     const rectSpacing = 454;
     const rectColor = '#1C0D32';
-    const rectX= 0;
+    const rectX= isMobile?margin.left:0;
     var bar_font_fill = 'white';
     var axis_font_fill = 'black';
     var annot_font_fill = '#1C0D32';
     var font_family = 'Barlow';
-    var font_size = '18px';
+    var font_size = isMobile? '16px':'18px';
     var font_reg_weight = '400';
     var font_bold_weight = '700';
-    var line_height = '25.2px';
+    var line_height = isMobile? '20px':'25.2px';
     
 
     // use this code to draw the gradient between the bars
@@ -320,7 +320,7 @@ let warning = ((selector = '#warning') => {
         .style('font-size',font_size)
         .style('font-weight',font_reg_weight);
 
-    var mobile_center_shift = 10
+    var mobile_center_shift = 20
     svg.append('rect')
         .attr('x',isMobile ? width/2 + mobile_center_shift-77/2: width/2-77/2)
         .attr('y',height - 200)
@@ -342,17 +342,17 @@ let warning = ((selector = '#warning') => {
     textChart.append('tspan')
         .text('We saw this trend after the Supreme Court released its')
         .attr('dy',line_height)
-        .attr('x',rectX-10);
+        .attr('x',isMobile?0:rectX);
 
     textChart.append('tspan')
         .text(`decision concerning Dobbs vs. Jackson Women's Health`)
         .attr('dy',line_height)
-        .attr('x',rectX-30);
+        .attr('x',isMobile?0:rectX);
 
     textChart.append('tspan')
         .text('Organization on June 24, 2022.')
         .attr('dy',line_height)
-        .attr('x',rectX);
+        .attr('x',isMobile?0:rectX);
 
     var textChart2 = svg.append('text')
         .attr('id','textChart2')
@@ -369,22 +369,22 @@ let warning = ((selector = '#warning') => {
         .text('Six states with abortion measures on the ballot in 2022')
         .attr('y',isMobile ? -margin.top+120 :rectHeight2 + 100)
         .attr('dy',line_height)
-        .attr('x',rectX);
+        .attr('x',isMobile?0:rectX);
 
     textChart2.append('tspan')
         .text('saw increased usage of Vote.org’s register to vote tool.')
         .attr('dy',line_height)
-        .attr('x',rectX);
+        .attr('x',isMobile?0:rectX);
 
     textChart2.append('tspan')
         .text('Among these six states, Vote.org tool')
         .attr('y',isMobile ? -margin.top+210 :rectHeight2 + 190)
-        .attr('x',rectX);
+        .attr('x',isMobile?0:rectX);
 
     textChart2.append('tspan')
         .text('uses increased by an average of 430%.')
         .attr('dy',line_height)
-        .attr('x',rectX);
+        .attr('x',isMobile?0:rectX);
 
     if (!(isMobile)) {
 
