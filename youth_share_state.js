@@ -81,7 +81,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
     // Add color scale
     const colorScale = d3.scaleOrdinal()
         .domain(["A", "B"])
-        .range(["#ffffff", "#B1A9E0"]);
+        .range(["#f7f8ff", "#B1A9E0"]);
 
     var group_space = 50
 
@@ -135,7 +135,7 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .style('font-family', 'Barlow Semi Condensed')
             .style('font-size', '18px')
             .style('font-weight', '500')
-            .style('fill', "#ffffff")
+            .style('fill', "#f7f8ff")
 
         var imp_text = state_group.append('text')
             .attr('class', 'difference')
@@ -143,13 +143,13 @@ let youth_share_state = ((selector = '#youth_share_state', data) => {
             .text(d.difference + '%')
             .style('font-family', 'Barlow')
             .style('font-size', '12px')
-            .style('fill', '#ffffff')
+            .style('fill', "#f7f8ff")
 
         imp_text.append('tspan')
             .text(' difference')
             .style('font-family', 'Barlow')
             .style('font-size', '12px')
-            .style('fill', '#ffffff')
+            .style('fill', "#f7f8ff")
 
         let bars = state_group
             .selectAll(`.${d.state}_bar`)

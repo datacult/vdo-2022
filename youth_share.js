@@ -28,7 +28,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         bottom: 50
     } : {
         left: 200,
-        right: 100,
+        right: 150,
         top: 50,
         bottom: 50
     }
@@ -63,7 +63,7 @@ let youth_share = ((selector = '#youth_share', data) => {
     // Add color scale
     const colorScale = d3.scaleOrdinal()
         .domain(["A", "B"])
-        .range(["#ffffff", "#B1A9E0"]);
+        .range(["#f7f8ff", "#B1A9E0"]);
 
     // Define the bar chart scales
     const x = d3.scaleLinear().range([0, width]);
@@ -116,7 +116,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("y", y("A") + (y.bandwidth() / 2) - 10)
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
-        .attr("fill", "white")
+        .attr("fill", "#f7f8ff")
         .style('font-size', '1em')
         .style('font-family',font_family)
         .text("Avg. youth share")
@@ -127,7 +127,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("y", y("A") + (y.bandwidth() / 2) + 10)
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
-        .attr("fill", "white")
+        .attr("fill", "#f7f8ff")
         .style('font-size', '1em')
         .style('font-family',font_family)
         .text("of the vote")
@@ -138,7 +138,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("y", y("A")  - 10)
         .attr("alignment-baseline", "bottom")
         .attr("text-anchor", "start")
-        .attr("fill", "white")
+        .attr("fill", "#f7f8ff")
         .style('font-size', '1.125em')
         .style('font-family',font_family)
         .text("Avg. youth share of the vote")
@@ -149,7 +149,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("y", y("B") + (y.bandwidth() / 2) - 10)
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
-        .attr("fill", "white")
+        .attr("fill", "#f7f8ff")
         .style('font-size', '1em')
         .style('font-family',font_family)
         .text("Avg. margins")
@@ -160,7 +160,7 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("y", y("B") + (y.bandwidth() / 2) + 10)
         .attr("alignment-baseline", "middle")
         .attr("text-anchor", "end")
-        .attr("fill", "white")
+        .attr("fill", "#f7f8ff")
         .style('font-size', '1em')
         .style('font-family',font_family)
         .text("of victory")
@@ -171,11 +171,27 @@ let youth_share = ((selector = '#youth_share', data) => {
         .attr("y", y("B")  - 10)
         .attr("alignment-baseline", "bottom")
         .attr("text-anchor", "start")
-        .attr("fill", "white")
+        .attr("fill", "#f7f8ff")
         .style('font-size', '1.125em')
         .style('font-family',font_family)
         .text("Avg. margins of victory")
         .attr('opacity',isMobile? 1:0);
+
+       var data_source =  svg.append("text")
+            .attr('x',0)
+            .attr("y", y("B")  + y.bandwidth()+40)
+            .text('Source: ')
+            .attr("alignment-baseline", "top")
+            .attr("fill", "#f7f8ff")
+            .style('font-size', '0.8em')
+            .style('font-style','italic')
+
+        data_source
+            .append('a')
+            .attr('href','https://circle.tufts.edu/2022-election-center')
+            .append('tspan')
+            .text('https://circle.tufts.edu/2022-election-center')
+            .attr("fill", "#f7f8ff")
 
     // update
 
