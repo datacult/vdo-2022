@@ -181,6 +181,7 @@ let youth_share = ((selector = '#youth_share', data) => {
             .attr('x',0)
             .attr("y", y("B")  + y.bandwidth()+40)
             .text('Source: ')
+            .style('font-family',font_family)
             .attr("alignment-baseline", "top")
             .attr("fill", "#f7f8ff")
             .style('font-size', '0.8em')
@@ -192,6 +193,7 @@ let youth_share = ((selector = '#youth_share', data) => {
             .append('tspan')
             .text('https://circle.tufts.edu/2022-election-center')
             .attr("fill", "#f7f8ff")
+            .style('font-family',font_family)
 
     // update
 
