@@ -274,7 +274,7 @@ let protect = ((selector = '#protecting-democracy') => {
     .attr('y',texty)
 
     text2023.append('tspan')
-    .text('In the first three months of 2023,')
+    .text('In the first month of 2023,')
     .attr('font-family',font_family)
     .attr('font-size',font_size)
     .attr('fill',font_fill)
@@ -313,6 +313,25 @@ let protect = ((selector = '#protecting-democracy') => {
 
     d3.selectAll('#text2022').style('opacity',0)
     d3.selectAll('#text2023').style('opacity',0)
+
+    var data_source =  svg.append("text")
+            .attr('x',start_x)
+            .attr("y", height + 65)
+            .text('Source: ')
+            .style('font-family',font_family)
+            .attr("alignment-baseline", "top")
+            .attr("fill", "#f7f8ff")
+            .style('font-size', '0.8em')
+            .style('font-style','italic')
+
+        data_source
+            .append('a')
+            .attr('href','https://www.brennancenter.org/')
+            .attr('target','_blank')
+            .append('tspan')
+            .text('https://www.brennancenter.org')
+            .attr("fill", "#f7f8ff")
+            .style('font-family',font_family)
 
 
     var legend = ['2021','2022','2023'], legend_x = width-10, legend_r = isMobile ? 10 : 5

@@ -364,24 +364,25 @@ let warning = ((selector = '#warning') => {
         .style('font-weight',font_reg_weight)
         .style('opacity',0);
 
+
     textChart2.append('tspan')
-        .text('Six states with abortion measures on the ballot saw')
+        .text('Six states with abortion measures on the ballot in 2022')
         .attr('y',isMobile ? -margin.top+120 :rectHeight2 + 100)
         .attr('dy',line_height)
         .attr('x',rectX);
 
     textChart2.append('tspan')
-        .text('over a 430% increase in Vote.org tool users.')
+        .text('saw increased usage of Vote.org’s register to vote tool.')
         .attr('dy',line_height)
         .attr('x',rectX);
 
     textChart2.append('tspan')
-        .text('We saw a nearly 1000% increase')
+        .text('Among these six states, Vote.org tool')
         .attr('y',isMobile ? -margin.top+210 :rectHeight2 + 190)
         .attr('x',rectX);
 
     textChart2.append('tspan')
-        .text('in registrations in Kansas alone.')
+        .text('uses increased by an average of 430%.')
         .attr('dy',line_height)
         .attr('x',rectX);
 
@@ -469,7 +470,7 @@ let warning = ((selector = '#warning') => {
 
     textGradient.append('tspan')
         .attr('id','annotationline2')
-        .text('Vote.org visits')
+        .text('visitors to Vote.org')
         .attr('dy',line_height)
         .attr('x',isMobile ? width/2 + mobile_center_shift: width/2);
 
@@ -486,23 +487,23 @@ let warning = ((selector = '#warning') => {
     textGradient2.append('tspan')
         .attr('id','percentage')
         .text('+ 333%');
-
+         
     textGradient2.append('tspan')
         .attr('id','annotationline1')
-        .text(isMobile ? 'increase in individuals': 'increase in individuals visiting the')
+        .text(isMobile ? 'increase in visitors': 'increase in visitors to')
         .attr('dy',line_height)
         .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
         .attr('y',height - 162);
 
     textGradient2.append('tspan')
         .attr('id','annotationline2')
-        .text(isMobile ? 'visiting the site to': 'site to register to vote')
+        .text(isMobile ? 'to our register': 'our register to vote tool')
         .attr('dy',line_height)
         .attr('x',isMobile ? width/2 + mobile_center_shift: width/2);
 
         textGradient2.append('tspan')
             .attr('id','annotationline2')
-            .text('register to vote')
+            .text('to vote tool')
             .attr('dy',line_height)
             .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
             .style('opacity',isMobile ? 1 : 0);
@@ -523,14 +524,14 @@ let warning = ((selector = '#warning') => {
 
     textGradient3.append('tspan')
         .attr('id','annotationline1')
-        .text(isMobile ? 'increase in' : 'increase in Vote.org tool users')
+        .text(isMobile ? 'average increase in' : 'average increase in Vote.org tool uses')
         .attr('dy',line_height)
         .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
         .attr('y',height - 162);
 
     textGradient3.append('tspan')
         .attr('id','annotationline2')
-        .text('Vote.org tool users')
+        .text('Vote.org tool uses')
         .attr('dy',line_height)
         .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
         .style('opacity',isMobile ? 1 : 0);
