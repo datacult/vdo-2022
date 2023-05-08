@@ -17,8 +17,8 @@ let warning = ((selector = '#warning') => {
 
     // margins for SVG
     const margin = isMobile ? {
-        left: -30,
-        right: -10,
+        left: 5,
+        right: 25,
         top: 50,
         bottom: 100
     } : {
@@ -342,12 +342,12 @@ let warning = ((selector = '#warning') => {
     textChart.append('tspan')
         .text('We saw this trend after the Supreme Court released its')
         .attr('dy',line_height)
-        .attr('x',rectX);
+        .attr('x',rectX-10);
 
     textChart.append('tspan')
         .text(`decision concerning Dobbs vs. Jackson Women's Health`)
         .attr('dy',line_height)
-        .attr('x',rectX);
+        .attr('x',rectX-30);
 
     textChart.append('tspan')
         .text('Organization on June 24, 2022.')
