@@ -141,7 +141,7 @@ let protect = ((selector = '#protecting-democracy') => {
 
     }
 
-    var col_number = isMobile ? 7 : 10
+    var col_number = isMobile ? 8 : 10
     bill_group.append('path')
         .attr('class','bill')
         .attr('id','b2023')
