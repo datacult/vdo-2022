@@ -17,7 +17,7 @@ let protect = ((selector = '#protecting-democracy') => {
 
     // margins for SVG
     const margin = isMobile ? {
-        left: 50,
+        left: 20,
         right: 50,
         top: 50,
         bottom: 50
@@ -197,14 +197,14 @@ let protect = ((selector = '#protecting-democracy') => {
     .attr('font-weight',700)
 
     text2021.append('tspan')
-    .text(' with')
+    .text(isMobile ? ' with provisions': ' with')
     .attr('font-family',font_family)
     .attr('font-size',font_size)
     .attr('fill',font_fill)
     .attr('font-weight',400)
 
     text2021.append('tspan')
-    .text('provisions that restrict voting access')
+    .text(isMobile ? 'that restrict voting access were introduced':'provisions that restrict voting access')
     .attr('dy',line_height)
     .attr('x',x2021)
     .attr('font-family',font_family)
@@ -212,7 +212,7 @@ let protect = ((selector = '#protecting-democracy') => {
     .attr('fill',font_fill)
 
     text2021.append('tspan')
-    .text('were introduced in 49 states.')
+    .text(isMobile ? 'in 49 states.':'were introduced in 49 states.')
     .attr('dy',line_height)
     .attr('x',x2021)
     .attr('font-family',font_family)
@@ -225,13 +225,13 @@ let protect = ((selector = '#protecting-democracy') => {
     .attr('y',texty)
 
     text2022.append('tspan')
-    .text('In 2022, legislators in at least 39')
+    .text(isMobile ? 'In 2022, legislators in at least 39 states':'In 2022, legislators in at least 39')
     .attr('font-family',font_family)
     .attr('font-size',font_size)
     .attr('fill',font_fill)
 
     text2022.append('tspan')
-    .text('states introduced, pre-filed, or')
+    .text(isMobile ? 'introduced, pre-filed, or carried over ':'states introduced, pre-filed, or')
     .attr('dy',line_height)
     .attr('x',x2022)
     .attr('font-family',font_family)
@@ -245,6 +245,7 @@ let protect = ((selector = '#protecting-democracy') => {
     .attr('font-family',font_family)
     .attr('font-size',font_size)
     .attr('fill',font_fill)
+    .style('display',isMobile?'none':1)
 
     text2022.append('tspan')
     .text('408 bills')
@@ -259,9 +260,10 @@ let protect = ((selector = '#protecting-democracy') => {
     .attr('font-size',font_size)
     .attr('fill',font_fill)
     .attr('font-weight',400)
+    .style('display',isMobile?'none':1)
 
     text2022.append('tspan')
-    .text('restrictive provisions.')
+    .text(isMobile?'with restrictive provisions.':'restrictive provisions.')
     .attr('dy',line_height)
     .attr('x',x2022)
     .attr('font-family',font_family)
@@ -280,23 +282,32 @@ let protect = ((selector = '#protecting-democracy') => {
     .attr('fill',font_fill)
 
     text2023.append('tspan')
-    .text('150 voter suppression bills')
+    .text(' 150 voter')
+    .attr('font-family',font_family)
+    .attr('font-size',font_size)
+    .attr('fill',font_fill)
+    .attr('font-weight',700)
+    .style('display',isMobile?1:'none')
+
+    text2023.append('tspan')
+    .text(isMobile?'supression bills':'150 voter suppression bills')
     .attr('dy',line_height)
     .attr('x',x2023)
     .attr('font-family',font_family)
     .attr('font-size',font_size)
     .attr('fill',font_fill)
     .attr('font-weight',700)
+    // .style('display',isMobile?'none':1)
 
     text2023.append('tspan')
-    .text(' in 32')
+    .text(isMobile?' in 32 states have already':' in 32')
     .attr('font-family',font_family)
     .attr('font-size',font_size)
     .attr('fill',font_fill)
     .attr('font-weight',400)
 
     text2023.append('tspan')
-    .text('states have already been')
+    .text(isMobile?'been introduced.':'states have already been')
     .attr('dy',line_height)
     .attr('x',x2023)
     .attr('font-family',font_family)
@@ -310,6 +321,7 @@ let protect = ((selector = '#protecting-democracy') => {
     .attr('font-family',font_family)
     .attr('font-size',font_size)
     .attr('fill',font_fill)
+    .style('display',isMobile?'none':1)
 
     d3.selectAll('#text2022').style('opacity',0)
     d3.selectAll('#text2023').style('opacity',0)
