@@ -173,7 +173,7 @@ let protect = ((selector = '#protecting-democracy') => {
     d3.selectAll('#b2022').style('opacity',0)
     d3.selectAll('#b2023').style('opacity',0)
 
-    var line_height = isMobile ? '30px' : '20px', font_size = isMobile ? '25px' : '16px', font_family = 'Barlow', font_fill = '#F7F8FF',
+    var line_height = isMobile ? '32px' : '20px', font_size = isMobile ? '28px' : '16px', font_family = 'Barlow', font_fill = '#F7F8FF',
     x2021 = isMobile ? 0 : 4*col_space+col_space/2.5, 
     x2022 = isMobile ? 0 : 8*col_space+col_space/2.5, 
     x2023 = isMobile ? 0 : 10*col_space+col_space/2.5,
