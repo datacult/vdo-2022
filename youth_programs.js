@@ -216,16 +216,27 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                      {"x":3,"y":7},
                      {"x":4,"y":6},
                      {"x":5,"y":5}],
-        inf_images = [{"x":0.3,"y":1,"file":'gif'},
-                     {"x":1.4,"y":0,"file":'svg'},
-                     {"x":2.6,"y":-1.5,"file":'svg'},
-                     {"x":3.75,"y":-0.5,"file":'svg'},
-                     {"x":4.8,"y":0.8,"file":'gif'},
-                     {"x":0.5,"y":4.5,"file":'svg'},
-                     {"x":1.5,"y":6,"file":'svg'},
-                     {"x":2.6,"y":6.8,"file":'gif'},
-                     {"x":3.85,"y":5.5,"file":'svg'},
-                     {"x":4.75,"y":4,"file":'svg'}]
+        // inf_images = [{"x":0.3,"y":1,"file":'gif'},
+        //              {"x":1.4,"y":0,"file":'svg'},
+        //              {"x":2.6,"y":-1.5,"file":'svg'},
+        //              {"x":3.75,"y":-0.5,"file":'svg'},
+        //              {"x":4.8,"y":0.8,"file":'gif'},
+        //              {"x":0.5,"y":4.5,"file":'svg'},
+        //              {"x":1.5,"y":6,"file":'svg'},
+        //              {"x":2.6,"y":6.8,"file":'gif'},
+        //              {"x":3.85,"y":5.5,"file":'svg'},
+        //              {"x":4.75,"y":4,"file":'svg'}],
+        inf_images = [{"x":0.3,"y":1,"file":'mp4'},
+                    {"x":1.4,"y":0,"file":'svg'},
+                    {"x":2.6,"y":-1.5,"file":'svg'},
+                    {"x":3.75,"y":-0.5,"file":'svg'},
+                    {"x":4.8,"y":0.8,"file":'gif'},
+                    {"x":0.5,"y":4.5,"file":'svg'},
+                    {"x":1.5,"y":6,"file":'svg'},
+                    {"x":2.6,"y":6.8,"file":'mp4'},
+                    {"x":3.85,"y":5.5,"file":'svg'},
+                    {"x":4.75,"y":4,"file":'svg'}]
+
     var inf_height = 150, inf_width = 80, rect_padding = 3
 
     var inf_groups = svg.append('g').attr('id','inf_groups')
@@ -269,13 +280,25 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
             .attr('x2',width/2)
             .attr('y2',height/2)
 
-        inf_groups.append("image")
+        if (inf_images[i].file != 'mp4'){
+            inf_groups.append("image")
             .attr('id',"inf-image"+i)
             .attr('class',"inf-group")
             .attr('href',`https://datacult.github.io/vdo-2022/assets/youth/Micro-influencer-${i}.${inf_images[i].file}`)
             .attr('transform',`translate (${width*(inf_images[i].x)/6}, ${height*(inf_images[i].y)/8})`)
             .attr('height',150)
             .attr("clip-path", `url(#logo-clip-${i})`)
+        } else {
+            inf_groups.append('video')
+            .attr('id',"inf-image"+i)
+            .attr('class',"inf-group")
+            .attr('height',150)
+            .append('source')
+            .attr('src',`https://datacult.github.io/vdo-2022/assets/youth/Micro-influencer-${i}.${inf_images[i].file}`)
+            .attr('type','video/mp4')
+            .attr("clip-path", `url(#logo-clip-${i})`)
+        }
+        
     }
 
     d3.selectAll('.inf-group').attr('opacity',0)
