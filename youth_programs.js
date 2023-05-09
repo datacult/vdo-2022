@@ -141,7 +141,7 @@ d3.json("https://raw.githubusercontent.com/loganpowell/census-geojson/master/Geo
 
 
 // Draw the map
-svg.append("g").attr('id','states')
+svg.append("g").attr('id','states_map')
     .selectAll(".country")
     .data(geodata.features)
     .join("path")
@@ -159,7 +159,7 @@ d3.select("#Alaska").attr('transform',ak_trans+" scale("+ak_scl+")")
 d3.select("#Hawaii").attr('transform',hi_trans+" scale("+hi_scl+")")
 d3.select("#Puerto-Rico").attr('display',"none")
 
-document.getElementById('map-group').insertBefore(document.getElementById('states'), document.getElementById('campus-line0'));
+document.getElementById('map-group').insertBefore(document.getElementById('states_map'), document.getElementById('campus-line0'));
 
 })
 
