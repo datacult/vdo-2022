@@ -216,26 +216,26 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
                      {"x":3,"y":7},
                      {"x":4,"y":6},
                      {"x":5,"y":5}],
-        // inf_images = [{"x":0.3,"y":1,"file":'gif'},
-        //              {"x":1.4,"y":0,"file":'svg'},
-        //              {"x":2.6,"y":-1.5,"file":'svg'},
-        //              {"x":3.75,"y":-0.5,"file":'svg'},
-        //              {"x":4.8,"y":0.8,"file":'gif'},
-        //              {"x":0.5,"y":4.5,"file":'svg'},
-        //              {"x":1.5,"y":6,"file":'svg'},
-        //              {"x":2.6,"y":6.8,"file":'gif'},
-        //              {"x":3.85,"y":5.5,"file":'svg'},
-        //              {"x":4.75,"y":4,"file":'svg'}],
-        inf_images = [{"x":0.3,"y":1,"file":'mp4'},
-                    {"x":1.4,"y":0,"file":'svg'},
-                    {"x":2.6,"y":-1.5,"file":'svg'},
-                    {"x":3.75,"y":-0.5,"file":'svg'},
-                    {"x":4.8,"y":0.8,"file":'gif'},
-                    {"x":0.5,"y":4.5,"file":'svg'},
-                    {"x":1.5,"y":6,"file":'svg'},
-                    {"x":2.6,"y":6.8,"file":'mp4'},
-                    {"x":3.85,"y":5.5,"file":'svg'},
-                    {"x":4.75,"y":4,"file":'svg'}]
+        inf_images = [{"x":0.3,"y":1,"file":'gif'},
+                     {"x":1.4,"y":0,"file":'svg'},
+                     {"x":2.6,"y":-1.5,"file":'svg'},
+                     {"x":3.75,"y":-0.5,"file":'svg'},
+                     {"x":4.8,"y":0.8,"file":'gif'},
+                     {"x":0.5,"y":4.5,"file":'svg'},
+                     {"x":1.5,"y":6,"file":'svg'},
+                     {"x":2.6,"y":6.8,"file":'gif'},
+                     {"x":3.85,"y":5.5,"file":'svg'},
+                     {"x":4.75,"y":4,"file":'svg'}]
+        // inf_images = [{"x":0.3,"y":1,"file":'mp4'},
+        //             {"x":1.4,"y":0,"file":'svg'},
+        //             {"x":2.6,"y":-1.5,"file":'svg'},
+        //             {"x":3.75,"y":-0.5,"file":'svg'},
+        //             {"x":4.8,"y":0.8,"file":'gif'},
+        //             {"x":0.5,"y":4.5,"file":'svg'},
+        //             {"x":1.5,"y":6,"file":'svg'},
+        //             {"x":2.6,"y":6.8,"file":'mp4'},
+        //             {"x":3.85,"y":5.5,"file":'svg'},
+        //             {"x":4.75,"y":4,"file":'svg'}]
 
     var inf_height = 150, inf_width = 80, rect_padding = 3
 
@@ -292,11 +292,11 @@ document.getElementById('map-group').insertBefore(document.getElementById('state
             inf_groups.append('video')
             .attr('id',"inf-image"+i)
             .attr('class',"inf-group")
-            .attr('height',150)
+            .attr('height','400vh')
             .append('source')
             .attr('src',`https://datacult.github.io/vdo-2022/assets/youth/Micro-influencer-${i}.${inf_images[i].file}`)
             .attr('type','video/mp4')
-            .attr("clip-path", `url(#logo-clip-${i})`)
+            // .attr("clip-path", `url(#logo-clip-${i})`)
         }
         
     }
