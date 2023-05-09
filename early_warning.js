@@ -19,7 +19,7 @@ let warning = ((selector = '#warning') => {
     const margin = isMobile ? {
         left: 20,
         right: 40,
-        top: 50,
+        top: 100,
         bottom: 100
     } : {
         left: 100,
