@@ -55,25 +55,25 @@ let state_programs = ((selector = '#state-programs', data) => {
     //     .style('justify-content','center')
     // }
 
-    if(isMobile) {
+    if (isMobile) {
         var svg = d3.selectAll(selector)
-        .append('svg')
-        // .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
-        .attr('width',svgWidth)
-        .attr('height',svgHeight)
-        .append('g')
-        // .attr('id','map-group')
-        .attr("transform", "translate(" + 0 + "," + 0 + ")")
+            .append('svg')
+            // .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
+            .attr('width', svgWidth)
+            .attr('height', svgHeight)
+            .append('g')
+            // .attr('id','map-group')
+            .attr("transform", "translate(" + 0 + "," + 0 + ")")
     } else {
         var svg = d3.selectAll(selector)
-        .append('svg')
-        .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
-        .append('g')
-        // .attr('id','map-group')
-        .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            .append('svg')
+            .attr("viewBox", `0 0 ${svgWidth} ${svgHeight}`)
+            .append('g')
+            // .attr('id','map-group')
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
     }
 
-    
+
 
     let tooltip = d3.select("#state-program-tooltip")
 
@@ -128,7 +128,7 @@ let state_programs = ((selector = '#state-programs', data) => {
             .attr('class', 'state-group')
             .attr('id', d.State)
             .attr("pointer-events", "bounding-box")
-            .attr('transform', isMobile ? `translate(${j*(group_width)},${groupSpaceY(row)}) scale(1.25)`: `translate(${colScale(col)},${groupSpaceY(row)})`)
+            .attr('transform', isMobile ? `translate(${j * (group_width)},${groupSpaceY(row)}) scale(1.25)` : `translate(${colScale(col)},${groupSpaceY(row)})`)
 
 
         state_group.append('image')
@@ -206,12 +206,40 @@ let state_programs = ((selector = '#state-programs', data) => {
 
 
     function handle_tooltip(state_data) {
-        d3.select("#state-name").text(state_data["State"] ? state_data["State"] : 0)
-        d3.select("#total-impressions").text(state_data["Total"] ? state_data["Total"] : 0)
-        d3.select("#radio").text(state_data["Radio"] ? state_data["Radio"] : 0)
-        d3.select("#streaming").text(state_data["Streaming"] ? state_data["Streaming"] : 0)
-        d3.select("#opt-in-reminders").text(state_data["Reminders"] ? state_data["Reminders"] : 0)
-        d3.select("#peer-to-peer").text(state_data["Peer"] ? state_data["Peer"] : 0)
+
+        d3.select("#state-name")
+            .text(state_data["State"] ? state_data["State"] : 0);
+
+        d3.select("#total-impressions")
+            .text(state_data["Total"] ? state_data["Total"] : 0);
+
+        d3.select("#total-impressions-container")
+            .style("display", state_data["Total"] ? "block" : "none");
+
+        d3.select("#radio")
+            .text(state_data["Radio"] ? state_data["Radio"] : 0);
+
+        d3.select("#radio-container")
+            .style("display", state_data["Radio"] ? "block" : "none");
+
+        d3.select("#streaming")
+            .text(state_data["Streaming"] ? state_data["Streaming"] : 0);
+
+        d3.select("#streaming-container")
+            .style("display", state_data["Streaming"] ? "block" : "none");
+
+        d3.select("#opt-in-reminders")
+            .text(state_data["Reminders"] ? state_data["Reminders"] : 0);
+
+        d3.select("#opt-in-reminders-container")
+            .style("display", state_data["Reminders"] ? "block" : "none");
+
+        d3.select("#peer-to-peer")
+            .text(state_data["Peer"] ? state_data["Peer"] : 0);
+
+        d3.select("#peer-to-peer-container")
+            .style("display", state_data["Peer"] ? "block" : "none");
+
     }
 
 })
