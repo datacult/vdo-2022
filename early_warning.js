@@ -17,7 +17,7 @@ let warning = ((selector = '#warning') => {
 
     // margins for SVG
     const margin = isMobile ? {
-        left: 20,
+        left: 40,
         right: 40,
         top: 100,
         bottom: 100
@@ -333,7 +333,7 @@ let warning = ((selector = '#warning') => {
     var textChart = svg.append('text')
         .attr('id','textChart')
         .style('text-anchor','left')
-        .attr('y',isMobile ? -margin.top+20 : rectHeight2)
+        .attr('y',isMobile ? margin.top : rectHeight2)
         .style('fill',annot_font_fill)
         .style('font-family',font_family)
         .style('font-size',font_size)
@@ -342,22 +342,22 @@ let warning = ((selector = '#warning') => {
     textChart.append('tspan')
         .text('We saw this trend after the Supreme Court released its')
         .attr('dy',line_height)
-        .attr('x',isMobile?0:rectX);
+        .attr('x',isMobile?rectX:rectX);
 
     textChart.append('tspan')
         .text(`decision concerning Dobbs vs. Jackson Women's Health`)
         .attr('dy',line_height)
-        .attr('x',isMobile?0:rectX);
+        .attr('x',isMobile?rectX:rectX);
 
     textChart.append('tspan')
         .text('Organization on June 24, 2022.')
         .attr('dy',line_height)
-        .attr('x',isMobile?0:rectX);
+        .attr('x',isMobile?rectX:rectX);
 
     var textChart2 = svg.append('text')
         .attr('id','textChart2')
         .style('text-anchor','left')
-        .attr('y',isMobile ? -margin.top+20 : rectHeight2)
+        .attr('y',isMobile ? margin.top : rectHeight2)
         .style('fill',annot_font_fill)
         .style('font-family',font_family)
         .style('font-size',font_size)
@@ -367,24 +367,24 @@ let warning = ((selector = '#warning') => {
 
     textChart2.append('tspan')
         .text('Six states with abortion measures on the ballot in 2022')
-        .attr('y',isMobile ? -margin.top+120 :rectHeight2 + 100)
+        .attr('y',isMobile ? margin.top+100 :rectHeight2 + 100)
         .attr('dy',line_height)
-        .attr('x',isMobile?0:rectX);
+        .attr('x',isMobile?rectX:rectX);
 
     textChart2.append('tspan')
         .text('saw increased usage of Vote.org’s register to vote tool.')
         .attr('dy',line_height)
-        .attr('x',isMobile?0:rectX);
+        .attr('x',isMobile?rectX:rectX);
 
     textChart2.append('tspan')
         .text('Among these six states, Vote.org tool')
-        .attr('y',isMobile ? -margin.top+210 :rectHeight2 + 190)
-        .attr('x',isMobile?0:rectX);
+        .attr('y',isMobile ? margin.top+190 :rectHeight2 + 190)
+        .attr('x',isMobile?rectX:rectX);
 
     textChart2.append('tspan')
         .text('uses increased by an average of 430%.')
         .attr('dy',line_height)
-        .attr('x',isMobile?0:rectX);
+        .attr('x',isMobile?rectX:rectX);
 
     if (!(isMobile)) {
 
