@@ -176,8 +176,8 @@ let protect = ((selector = '#protecting-democracy') => {
         .style('stroke','#1C0D32')
 
 
-    d3.selectAll('#bill_group22').style('opacity',0)
-    d3.selectAll('#bill_group23').style('opacity',0)
+    d3.selectAll('#bill-group22').style('opacity',0)
+    d3.selectAll('#bill-group23').style('opacity',0)
 
     var line_height = isMobile ? '32px' : '20px', font_size = isMobile ? '28px' : '16px', font_family = 'Barlow', font_fill = '#F7F8FF',
     x2021 = isMobile ? 0 : 4*col_space+col_space/2.5, 
