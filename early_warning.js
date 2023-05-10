@@ -127,7 +127,7 @@ let warning = ((selector = '#warning') => {
     // Add Y axis scale
     var y = d3.scaleLinear()
         .domain([0, 700000])
-        .range([height, 30]);   
+        .range([height, 40]);   
 
       // color palette = one color per subgroup
       const color = d3.scaleOrdinal()
@@ -333,7 +333,7 @@ let warning = ((selector = '#warning') => {
     var textChart = svg.append('text')
         .attr('id','textChart')
         .style('text-anchor','left')
-        .attr('y',isMobile ? 0 : rectHeight2)
+        .attr('y',isMobile ? 25 : rectHeight2)
         .style('fill',annot_font_fill)
         .style('font-family',font_family)
         .style('font-size',font_size)
@@ -357,7 +357,7 @@ let warning = ((selector = '#warning') => {
     var textChart2 = svg.append('text')
         .attr('id','textChart2')
         .style('text-anchor','left')
-        .attr('y',isMobile ? 0 : rectHeight2)
+        .attr('y',isMobile ? 25 : rectHeight2)
         .style('fill',annot_font_fill)
         .style('font-family',font_family)
         .style('font-size',font_size)
@@ -367,7 +367,7 @@ let warning = ((selector = '#warning') => {
 
     textChart2.append('tspan')
         .text('Six states with abortion measures on the ballot in 2022')
-        .attr('y',isMobile ? 0+75 :rectHeight2 + 100)
+        .attr('y',isMobile ? 25+75 :rectHeight2 + 100)
         .attr('dy',line_height)
         .attr('x',isMobile?0:rectX);
 
@@ -378,7 +378,7 @@ let warning = ((selector = '#warning') => {
 
     textChart2.append('tspan')
         .text('Among these six states, Vote.org tool')
-        .attr('y',isMobile ? 0+150 :rectHeight2 + 190)
+        .attr('y',isMobile ? 25+150 :rectHeight2 + 190)
         .attr('x',isMobile?0:rectX);
 
     textChart2.append('tspan')
@@ -579,7 +579,7 @@ let warning = ((selector = '#warning') => {
         if(step==1) {
             y = d3.scaleLinear()
             .domain([0, 700000])
-            .range([height, 30]);
+            .range([height, 40]);
 
             textChart2.style('opacity',0)
 
@@ -626,7 +626,7 @@ let warning = ((selector = '#warning') => {
         } else if(step==2) {
             y = d3.scaleLinear()
             .domain([0, 42000])
-            .range([height, 30]);
+            .range([height, 40]);
 
             textChart2.transition().duration(700).style('opacity',0)
 
@@ -677,7 +677,7 @@ let warning = ((selector = '#warning') => {
 
             y = d3.scaleLinear()
             .domain([0, 35000])
-            .range([height, 30]);
+            .range([height, 40]);
 
             textChart2.transition().duration(1500).style('opacity',1)
 
