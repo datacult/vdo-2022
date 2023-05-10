@@ -19,7 +19,7 @@ let warning = ((selector = '#warning') => {
     const margin = isMobile ? {
         left: 40,
         right: 40,
-        top: 40,
+        top: 100,
         bottom: 100
     } : {
         left: 100,
@@ -30,7 +30,7 @@ let warning = ((selector = '#warning') => {
 
     // responsive width & height (adjusts ViewBox) - currently set for a full window view
     const svgWidth = isMobile ? screen.width*1.5 : 820//window.innerWidth
-    const svgHeight = isMobile ? screen.height*1.1 : 750//window.innerHeight
+    const svgHeight = isMobile ? screen.height*1.2 : 750//window.innerHeight
 
     // helper calculated variables for inner width & height
     const height = svgHeight - margin.top - margin.bottom
