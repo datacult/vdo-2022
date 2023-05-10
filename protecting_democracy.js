@@ -341,7 +341,7 @@ let protect = ((selector = '#protecting-democracy') => {
             .attr('href','https://www.brennancenter.org/')
             .attr('target','_blank')
             .append('tspan')
-            .text('www.brennancenter.org')
+            .text('brennancenter.org')
             .attr("fill", "#f7f8ff")
             .style('font-family',font_family)
 
