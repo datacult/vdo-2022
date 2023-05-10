@@ -192,7 +192,7 @@ let youth_share = ((selector = '#youth_share', data) => {
             .attr('href','https://circle.tufts.edu/2022-election-center')
             .attr('target','_blank')
             .append('tspan')
-            .text('https://circle.tufts.edu/2022-election-center')
+            .text('circle.tufts.edu/2022-election-center')
             .attr("fill", "#f7f8ff")
             .style('font-family',font_family)
 
