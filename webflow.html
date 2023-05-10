@@ -1,0 +1,139 @@
+<!-- inside <head> -->
+<style>
+    
+    /* add any local styling here - will be added directly to webflow */
+    #data-circle {
+        transition: 1s;
+    }
+    
+    .bill {
+        transition: 1s;
+    }
+    
+    div.tooltip {
+            font-family: 'Barlow';
+            position: absolute;
+            padding: 10px 15px;
+            background: #FFFFFF;
+            border: 0px;
+            border-radius: 20px;
+            pointer-events: none;
+            opacity: 0;
+            box-shadow: 0px 2px 20px 0px rgba(28, 13, 50, 0.25);
+        }
+
+        .tootlip-program-title {
+            display: inline-block;
+            width: 140px;
+            padding-left: 10px;
+        }
+
+        .tootlip-impressions-title {
+            display: inline-block;
+            width: 150px;
+        }
+
+        #state-program-tooltip > * {
+            margin: 7px;
+        }
+
+        .dot {
+            height: 8px;
+            width: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+        
+</style>
+
+
+<!-- before </body> -->
+<div id="state-program-tooltip" , class="tooltip">
+    <div id="state-name" style="font-weight: bold;"></div>
+    <div id="total-impressions-container">
+        <span class="tootlip-impressions-title">Total Impressions</span>
+        <span id="total-impressions" style="font-weight: bold;"></span>
+    </div>
+    <div id="radio=container">
+        <span class="dot" style="background-color: #6941BD;"></span>
+        <span class="tootlip-program-title">Radio</span>
+        <span id="radio" style="font-weight: bold;"></span>
+    </div>
+    <div id="streaming-container">
+        <span class="dot" style="background-color: #FF9995;"></span>
+        <span class="tootlip-program-title">Streaming</span>
+        <span id="streaming" style="font-weight: bold;"></span>
+    </div>
+    <div id="opt-in-reminders-container">
+        <span class="dot" style="background-color: #819DFF;"></span>
+        <span class="tootlip-program-title">Opt-In Reminders</span>
+        <span id="opt-in-reminders" style="font-weight: bold;"></span>
+    </div>
+    <div id="peer-to-peer-container">
+        <span class="dot" style="background-color: #D6D6F2;"></span>
+        <span class="tootlip-program-title">Peer-to-Peer</span>
+        <span id="peer-to-peer" style="font-weight: bold;"></span>
+    </div>
+</div>
+<script src="https://d3js.org/d3.v6.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://unpkg.com/topojson-client@3"></script>
+<script src="https://datacult.github.io/vdo-2022/youth_programs.js"></script>
+<script src="https://datacult.github.io/vdo-2022/youth_share.js"></script>
+<script src="https://datacult.github.io/vdo-2022/youth_share_state.js"></script>
+<script src="https://datacult.github.io/vdo-2022/state_programs.js"></script>
+<script src="https://datacult.github.io/vdo-2022/protecting_democracy.js"></script>
+<script src="https://datacult.github.io/vdo-2022/early_warning.js"></script>
+<script>
+$(window).on('beforeunload', function() {
+$('body').hide();
+$(window).scrollTop(0);
+});
+async function init() {
+
+    let youth_vis = youth("#youth-programs")
+    
+    
+    let data = await d3.csv('https://datacult.github.io/vdo-2022/state_programs.csv', d3.autoType)
+
+    let youth_share_vis = youth_share("#youth_share", data)
+    let share_state_vis = youth_share_state("#youth_share_state", data)
+    
+    let state_data = await d3.csv('https://datacult.github.io/vdo-2022/state_programs.csv', d3.autoType)
+    let state_vis = state_programs("#state-programs", state_data)
+    
+    let protect_vis = protect("#protecting-democracy")
+    let warning_vis = warning("#warning")
+
+}
+init()
+
+</script>
+<script>
+document.getElementById('times-square-video').innerHTML = `<video width="100%" height="Auto" autoplay muted loop>
+<source src="https://datacult.github.io/vdo-2022/assets/times-square.mp4" type="video/mp4">
+</video>`
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+<script>
+
+new PureCounter({
+// Setting that can't' be overriden on pre-element
+selector: '.headline-stat',		// HTML query selector for spesific element
+
+// Settings that can be overridden on per-element basis, by `data-purecounter-*` attributes:
+start: 100000000, 			            // Starting number [unit]
+end: 270000000, 			            // End number [unit]
+duration: 1, 	                // The time in seconds for the animation to complete [seconds]
+delay: 15, 			            // The delay between each iteration (the default of 10 will produce 100 fps) [miliseconds]
+once: true, 		            // Counting at once or recount when the element in view [boolean]
+repeat: false, 		            // Repeat count for certain time [boolean:false|seconds]
+decimals: 0, 		            // How many decimal places to show. [unit]
+legacy: true,                   // If this is true it will use the scroll event listener on browsers
+filesizing: false, 	            // This will enable/disable File Size format [boolean]
+currency: false, 	            // This will enable/disable Currency format. Use it for set the symbol too [boolean|char|string]
+separator: true, 	            // This will enable/disable comma separator for thousands. Use it for set the symbol too [boolean|char|string]
+});
+
+</script>
+
