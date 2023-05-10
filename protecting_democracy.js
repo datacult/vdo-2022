@@ -122,14 +122,20 @@ let protect = ((selector = '#protecting-democracy') => {
     var bills2021 = 440, bills2022 = 408/*250*/, bills2023 = 150-3, total_bills = bills2021+bills2022+bills2023,
     stack_height = isMobile ? 125 : 100, start_x = 0, start_y = isMobile ? height-30 : height, wiggle = 3, col_space = isMobile ? 62 : 60
 
-    var bill_group = svg.append('g')
+    var bill_group = svg.append('g').attr('id','bill-groups')
+    var bill_group21 = bill_group.append('g').attr('id','bill-group21').attr('class','bill-group')
+    var bill_group22 = bill_group.append('g').attr('id','bill-group22').attr('class','bill-group')
+    var bill_group23 = bill_group.append('g').attr('id','bill-group23').attr('class','bill-group')
+    var bill_group_select
 
     for (let i = 0; i < total_bills; i++) {
         
     var col = Math.ceil((i+1)/stack_height)-1, row = (i)%stack_height,
     group_year = (i < bills2021) ? "2021" : ((i < bills2021+bills2022) ? "2022" : "2023")
     
-    bill_group.append('path')
+    bill_group_select = (i < bills2021) ? bill_group21 : ((i < bills2021+bills2022) ? bill_group22 : bill_group23)
+
+    bill_group_select.append('path')
         .attr('class','bill')
         .attr('id','b'+group_year)
         // .attr('d','M1.05078 14.4804L24.0773 1.22266L50.8388 17.4124L29.1068 32.5108L1.05078 14.4804Z')
@@ -142,7 +148,7 @@ let protect = ((selector = '#protecting-democracy') => {
     }
 
     var col_number = isMobile ? 8 : 10
-    bill_group.append('path')
+    bill_group23.append('path')
         .attr('class','bill')
         .attr('id','b2023')
         .attr('d','M1.05078 14.4804L24.0773 1.22266L50.8388 17.4124L29.1068 32.5108L1.05078 14.4804Z')
@@ -151,7 +157,7 @@ let protect = ((selector = '#protecting-democracy') => {
         .style('stroke-width','0.7px')
         .style('stroke','#1C0D32')
 
-    bill_group.append('path')
+    bill_group23.append('path')
         .attr('class','bill')
         .attr('id','b2023')
         .attr('d','M1.05078 14.4804L24.0773 1.22266L50.8388 17.4124L29.1068 32.5108L1.05078 14.4804Z')
@@ -160,7 +166,7 @@ let protect = ((selector = '#protecting-democracy') => {
         .style('stroke-width','0.7px')
         .style('stroke','#1C0D32')
 
-    bill_group.append('path')
+    bill_group23.append('path')
         .attr('class','bill')
         .attr('id','b2023')
         .attr('d','M1.05078 14.4804L24.0773 1.22266L50.8388 17.4124L29.1068 32.5108L1.05078 14.4804Z')
@@ -170,8 +176,8 @@ let protect = ((selector = '#protecting-democracy') => {
         .style('stroke','#1C0D32')
 
 
-    d3.selectAll('#b2022').style('opacity',0)
-    d3.selectAll('#b2023').style('opacity',0)
+    d3.selectAll('#bill_group22').style('opacity',0)
+    d3.selectAll('#bill_group23').style('opacity',0)
 
     var line_height = isMobile ? '32px' : '20px', font_size = isMobile ? '28px' : '16px', font_family = 'Barlow', font_fill = '#F7F8FF',
     x2021 = isMobile ? 0 : 4*col_space+col_space/2.5, 
@@ -377,8 +383,8 @@ let protect = ((selector = '#protecting-democracy') => {
         // update for step 1
             if (step == 1){
 
-                d3.selectAll('#b2022').style('opacity',0)
-                d3.selectAll('#b2023').style('opacity',0)
+                d3.selectAll('#bill-group22').style('opacity',0)
+                d3.selectAll('#bill-group23').style('opacity',0)
                 d3.selectAll('.legend2022').transition().duration(1000).style('opacity',0)
                 d3.selectAll('.legend2023').transition().duration(1000).style('opacity',0)
                 d3.selectAll('#text2021').transition().duration(500).delay(500).style('opacity',1)
@@ -389,8 +395,8 @@ let protect = ((selector = '#protecting-democracy') => {
         // update for step 2
             else if (step == 2){
 
-                d3.selectAll('#b2022').style('opacity',1)
-                d3.selectAll('#b2023').style('opacity',0)
+                d3.selectAll('#bill-group22').style('opacity',1)
+                d3.selectAll('#bill-group23').style('opacity',0)
                 d3.selectAll('.legend2022').transition().duration(1000).style('opacity',1)
                 d3.selectAll('.legend2023').transition().duration(1000).style('opacity',0)
                 d3.selectAll('#text2021').transition().duration(500).style('opacity',0)
@@ -401,8 +407,8 @@ let protect = ((selector = '#protecting-democracy') => {
         // update for step 2
             else if (step == 3){
 
-                d3.selectAll('#b2022').style('opacity',1)
-                d3.selectAll('#b2023').style('opacity',1)
+                d3.selectAll('#bill-group22').style('opacity',1)
+                d3.selectAll('#bill-group23').style('opacity',1)
                 d3.selectAll('.legend2022').transition().duration(1000).style('opacity',1)
                 d3.selectAll('.legend2023').transition().duration(1000).style('opacity',1)
                 d3.selectAll('#text2021').transition().duration(500).style('opacity',0)
