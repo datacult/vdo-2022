@@ -127,7 +127,8 @@ let warning = ((selector = '#warning') => {
     // Add Y axis scale
     var y = d3.scaleLinear()
         .domain([0, 700000])
-        .range([height, 40]);   
+        .range([height, 40]);
+           
 
       // color palette = one color per subgroup
       const color = d3.scaleOrdinal()
