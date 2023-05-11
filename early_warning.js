@@ -129,7 +129,6 @@ let warning = ((selector = '#warning') => {
         .domain([0, 700000])
         .range([height, 40]);
            
-
       // color palette = one color per subgroup
       const color = d3.scaleOrdinal()
         .domain(subgroups)
