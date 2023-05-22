@@ -506,7 +506,7 @@ let warning = ((selector = '#warning') => {
             .text('to vote tool')
             .attr('dy',line_height)
             .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
-            .style('opacity',isMobile ? 1 : 0);
+            .style('display',isMobile ? 1 : 'none');
 
     var textGradient3 = svg.append('text')
         .attr('id','textGradient3')
@@ -534,7 +534,7 @@ let warning = ((selector = '#warning') => {
         .text('Vote.org tool uses')
         .attr('dy',line_height)
         .attr('x',isMobile ? width/2 + mobile_center_shift: width/2)
-        .style('opacity',isMobile ? 1 : 0);
+        .style('display',isMobile ? 1 : 'none');
 
     textGradient.attr('opacity',1);
     textGradient2.attr('opacity',0);
